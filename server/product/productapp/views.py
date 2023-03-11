@@ -4,9 +4,16 @@ from .serializers import BirdSerializer, CropSerializer, EquipmentSerializer
 from rest_framework import generics, status
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-
+import json
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 # Create your views here.
 
+
+@api_view(["GET"])
+def ping(request):
+    message = {"reply": "ping"}
+    return Response(message)
 class BirdView(generics.GenericAPIView):
     serializer_class = BirdSerializer
     queryset = Bird.objects.all()
@@ -120,3 +127,26 @@ class SingleEquipView(generics.GenericAPIView):
         equipment.delete()
         return Response(status= status.HTTP_204_NO_CONTENT)
 
+class GetPrices(APIView):
+    def get (self, requests, pk):
+        try:
+            bird = Bird.objects.get(id=pk)
+        except:
+            bird = None
+        try:
+            crop = Crop.objects.get(id=pk)
+        except:
+            crop = None
+        try:
+            equip = Equipment.objects.get(id=pk)
+        except:
+            equip = None
+        if bird:
+            price = bird.price
+            return Response(bird.price, status =status.HTTP_200_OK)
+        elif crop:
+            return Response(crop.price, status =status.HTTP_200_OK)
+        elif equip:
+            return Response(equip.price, status =status.HTTP_200_OK)
+        else:
+            return Response(data= {"message": "invalid id"}, status= status.HTTP_400_BAD_REQUEST)

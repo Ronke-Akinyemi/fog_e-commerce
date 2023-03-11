@@ -1,0 +1,88 @@
+from flask import Blueprint, jsonify, request, abort
+import os
+import requests
+import random
+
+from dotenv import load_dotenv
+load_dotenv()
+views = Blueprint("",__name__)
+
+
+def generateReferenceNumber():
+    return random.randrange(1111111111, 9999999999)
+
+birds = [ "layers POL", "layers POC", "layers DOC", "layers Spent", "Broiler DOC",
+"Broiler 8 weeks","Broiler 8 weeks" "Turkey DOC", "layers Table size", "Broiler Table Size"]
+
+crop = [ "maize", "cassava", "yam", "rice" ]
+
+equip_type = (
+    ("crop", "crop"),
+    ("animal", "animal")
+)
+
+@views.route("/")
+def home():
+    from . import Payment
+    all = Payment.query.all()
+    payment_history = []
+    for payment in all:
+        pay = {}
+        pay["ref"] = payment.ref
+        pay["date"] = payment.date
+        pay["amount"] = payment.amount
+        pay["email"] = payment.email
+        payment_history.append(pay)
+    print(payment_history)
+    return jsonify(payment_history)
+
+
+@views.route("/pay", methods=["POST"])
+def pay():
+    data = request.get_json()
+    if not data:
+        abort(400, description="Not a JSON")
+
+    email = data.get("email")
+    data = data.get("data")
+    if not email or not data:
+        abort(400, description = "invalid credentials")
+    amount = 0
+    for good in data:
+        id = good.get("id")
+        type = good.get("type")
+        quantity = good.get("quantity")
+        if not id or not type or not quantity:
+            abort(400, description= "incomplete details")
+        
+    # reference = generateReferenceNumber()
+    # amount = amount * 100
+    # data = {"email":email, "amount":amount, "reference":reference}
+    # url = 'https://api.paystack.co/transaction/initialize'
+    # headers = {"authorization": f"Bearer {os.getenv('PAYSTACK_SECRET_KEY')}"}
+    # r = requests.post(url, headers=headers, data=data)
+    # response = r.json()
+    # # print(response)
+    # if not response['status']:
+    #     abort(400, description = response['message'])
+    # return jsonify(response)
+
+@views.route("/verify/<ref>")
+def verify(ref):
+    from . import Payment, db
+    reference = ref
+    ref_very = Payment.query.filter_by(ref = reference).first()
+    if ref_very:
+        return jsonify({"message": "payment verified"})
+    url = 'https://api.paystack.co/transaction/verify/{}'.format(reference)
+    headers = {"authorization": f"Bearer {os.getenv('PAYSTACK_SECRET_KEY')}"}
+    r = requests.get(url, headers=headers)
+    resp = r.json()
+    if resp['data']['status'] != 'success':
+        abort(400, description="Payment not succesful")
+    email = resp['data']['customer']['email']
+    amount = resp['data']['amount'] / 100
+    payment = Payment(email = email, ref = reference, amount = amount)
+    db.session.add(payment)
+    db.session.commit()
+    return jsonify({"message":"ok"}, 200)
