@@ -24,7 +24,7 @@ def index():
 @views.route("/contact", methods = ["POST"])
 def contact():
     from . import mail, db
-    from .models import ContactMessage
+    from . import ContactMessage
     if not request.get_json():
         abort(400, description="Not a JSON")
     data = request.get_json()
@@ -50,37 +50,43 @@ def contact():
 
 @views.route("/sub", methods=["GET", "POST"])
 def sub():
-    from .models import newsletter
+    from .import Newsletter
+    from . import mail, db, Newsletter
     if request.method == "GET":
-        subscribers = newsletter.query.all()
+        subscribers = Newsletter.query.all()
         return jsonify(subscribers, 200)
     else:
         data = request.get_json()
         email = data.get("email")
-        new_subscriber = newsletter(email = email)
+        if Newsletter.query.filter_by(email = email).first():
+            abort(400, description="You are already a subscriber")
+            return jsonify(results)
+        new_subscriber = Newsletter(email = email)
         db.session.add(new_subscriber)
         db.session.commit()
         return jsonify({"message":"ok"}, 200)
 
-@views.route("/unsub", method = ["POST"])
+@views.route("/unsub", methods = ["POST"])
 def un_sub():
+    from . import mail, db, Newsletter
     data = request.get_json()
     email = data.get("email")
-    subscriber = newsletter.query.filter_by(email=email).first()
+    subscriber = Newsletter.query.filter_by(email=email).first()
     if not subscriber:
         abort(400, description="User not a subscriber")
     db.session.delete(subscriber)
     db.session.commit()
     return jsonify({"message":"ok"}, 200)
 
-@views.route("/news", method=["POST"])
+@views.route("/news", methods=["POST"])
 def news():
+    from . import mail, db, Newsletter
     data = request.get_json()
     message = data.get("message")
     subject = data.get("subject")
     if (len(message) < 1 or len(subject) < 1):
         abort(400, description="Field can not be empty")
-    subscribers = Newletter.query.all()
+    subscribers = Newsletter.query.all()
     recipients = []
     for sub in subscribers:
         recipients.append(sub.email)
