@@ -1,4 +1,4 @@
-from .app import db
+from notification_project import db
 from datetime import datetime
 from fastapi_utils.guid_type import GUID, GUID_DEFAULT_SQLITE
 
@@ -17,3 +17,8 @@ class ContactMessage(db.Model):
     date = db.Column(db.DateTime, nullable= False, default=datetime.utcnow)
     def _repr__(self):
         return f"Message from {self.name}, date: {self.date_posted}"
+
+class Newletter(db.Model):
+    __tablename__ = "newsletter"
+    id = db.Column(GUID, primary_key=True, default=GUID_DEFAULT_SQLITE)
+    email = db.Column(db.String(120), unique=True, nullable=False)

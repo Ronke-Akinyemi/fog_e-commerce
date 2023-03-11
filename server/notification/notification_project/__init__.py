@@ -1,0 +1,37 @@
+from flask import Flask
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from os import path
+import os
+from dotenv import load_dotenv
+from flask_mail import Mail
+load_dotenv()
+
+
+
+DB_NAME = "notification.db"
+db = SQLAlchemy()
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['MAIL_SERVER']='smtp.gmail.com'
+    app.config['MAIL_PORT'] = 587
+    app.config['MAIL_USERNAME'] = os.getenv("email")
+    app.config['MAIL_PASSWORD'] = os.getenv('password')
+    app.config['MAIL_USE_TLS'] = True
+    db.init_app(app)
+    from .views import views
+    app.register_blueprint(views, url_prefix='/')
+    create_database(app)
+    return app
+
+
+def create_database(app):
+    if not path.exists('notification/' + DB_NAME):
+        with app.app_context():
+            db.create_all()
+        print("Created Database")
+
+app = create_app()
+CORS(app)
+mail = Mail(app)
