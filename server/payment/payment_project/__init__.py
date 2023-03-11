@@ -29,7 +29,6 @@ def create_database(app):
     if not path.exists('payment/' + DB_NAME):
         with app.app_context():
             db.create_all()
-        print("Created Database")
 
 app = create_app()
 CORS(app)

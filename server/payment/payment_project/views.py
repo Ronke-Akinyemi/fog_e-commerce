@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, abort
 import os
 import requests
+import json
 import random
 
 from dotenv import load_dotenv
@@ -10,16 +11,6 @@ views = Blueprint("",__name__)
 
 def generateReferenceNumber():
     return random.randrange(1111111111, 9999999999)
-
-birds = [ "layers POL", "layers POC", "layers DOC", "layers Spent", "Broiler DOC",
-"Broiler 8 weeks","Broiler 8 weeks" "Turkey DOC", "layers Table size", "Broiler Table Size"]
-
-crop = [ "maize", "cassava", "yam", "rice" ]
-
-equip_type = (
-    ("crop", "crop"),
-    ("animal", "animal")
-)
 
 @views.route("/")
 def home():
@@ -33,7 +24,6 @@ def home():
         pay["amount"] = payment.amount
         pay["email"] = payment.email
         payment_history.append(pay)
-    print(payment_history)
     return jsonify(payment_history)
 
 
@@ -42,30 +32,34 @@ def pay():
     data = request.get_json()
     if not data:
         abort(400, description="Not a JSON")
-
     email = data.get("email")
     data = data.get("data")
     if not email or not data:
         abort(400, description = "invalid credentials")
     amount = 0
     for good in data:
-        id = good.get("id")
-        type = good.get("type")
-        quantity = good.get("quantity")
-        if not id or not type or not quantity:
+        id = good["id"]
+        quantity = good["quantity"]
+        if not id or not quantity or not isinstance(quantity, int):
             abort(400, description= "incomplete details")
-        
-    # reference = generateReferenceNumber()
-    # amount = amount * 100
-    # data = {"email":email, "amount":amount, "reference":reference}
-    # url = 'https://api.paystack.co/transaction/initialize'
-    # headers = {"authorization": f"Bearer {os.getenv('PAYSTACK_SECRET_KEY')}"}
-    # r = requests.post(url, headers=headers, data=data)
-    # response = r.json()
-    # # print(response)
-    # if not response['status']:
-    #     abort(400, description = response['message'])
-    # return jsonify(response)
+        url = f"http://localhost:8001/prices/{id}"
+        response = requests.get(url)
+        price = response.json()
+        if response.status_code != 200:
+            return jsonify({"message": "Product not available"})
+        amount += (quantity * price)
+
+    # return jsonify({"amount":amount})
+    reference = generateReferenceNumber()
+    amount = amount * 100
+    data = {"email":email, "amount":amount, "reference":reference}
+    url = 'https://api.paystack.co/transaction/initialize'
+    headers = {"authorization": f"Bearer {os.getenv('PAYSTACK_SECRET_KEY')}"}
+    r = requests.post(url, headers=headers, data=data)
+    response = r.json()
+    if not response['status']:
+        abort(400, description = response['message'])
+    return jsonify(response)
 
 @views.route("/verify/<ref>")
 def verify(ref):
