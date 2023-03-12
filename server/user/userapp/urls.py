@@ -16,14 +16,15 @@ urlpatterns = [
     # path("prices/<str:pk>", views.GetPrices.as_view(), name = "prices"),
 
     # Payment service
-    path("payments", views.GetPaymentHistory.as_view(), name = "prices"),
-    path("pay", views.MakePayment.as_view(), name = "prices"),
-    path("verify/<str:pk>", views.VerifyPayment.as_view(), name = "prices"),
+    path("payments", views.GetPaymentHistory.as_view(), name = "payment"),
+    path("pay", views.MakePayment.as_view(), name = "pay"),
+    path("verify/<str:pk>", views.VerifyPayment.as_view(), name = "verify"),
 
 
     # Notification service
-    path("contact", views.ContactMessage.as_view(), name="single_crop"),
-    path("sub", views.Subscibe.as_view(), name="equip"),
-    path("unsub", views.UnSubscibe.as_view(), name = "single_equip"),
-    path("news", views.Newsletter.as_view(), name = "prices"),
+    path("contact", views.ContactMessage.as_view(), name="contact"),
+    path("all_sub", views.AllSubcribers.as_view(), name="all_sub"),
+    path("sub", views.Subscibe.as_view(), name="sub"),
+    path("unsub", views.UnSubscibe.as_view(), name = "unsub"),
+    path("news", views.Newsletter.as_view(), name = "news"),
 ]

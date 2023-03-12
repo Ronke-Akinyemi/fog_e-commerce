@@ -32,9 +32,10 @@ class AllProductView(APIView):
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
         return Response(response.json(), status = response.status_code)
-    def post(self, request):
+
+
 class BirdView(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
         url = "http://localhost:8001/bird"
         response = requests.get(url)
@@ -60,15 +61,15 @@ class SingleBirdView(APIView):
         return Response(response.json(), status = response.status_code)
     def delete(self, request, pk):
         url = f"http://localhost:8001/bird/{pk}"
-        response = requests.get(url)
+        response = requests.delete(url)
         if response.status_code != 204:
             return Response(response.reason, status = response.status_code)
-        return Response(response.json(), status = response.status_code)
-    def put(self, request):
+        return Response(status = response.status_code)
+    def put(self, request, pk):
         url = f"http://localhost:8001/bird/{pk}"
         headers = {"Content-type": "application/json"}
         data = json.dumps(request.data)
-        response = requests.post(url, headers=headers, data=data)
+        response = requests.put(url, headers=headers, data=data)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
         return Response(response.json(), status = response.status_code)
@@ -100,15 +101,15 @@ class SingleCropView(APIView):
         return Response(response.json(), status = response.status_code)
     def delete(self, request, pk):
         url = f"http://localhost:8001/crop/{pk}"
-        response = requests.get(url)
+        response = requests.delete(url)
         if response.status_code != 204:
             return Response(response.reason, status = response.status_code)
-        return Response(response.json(), status = response.status_code)
-    def put(self, request):
+        return Response(status = response.status_code)
+    def put(self, request, pk):
         url = f"http://localhost:8001/crop/{pk}"
         headers = {"Content-type": "application/json"}
         data = json.dumps(request.data)
-        response = requests.post(url, headers=headers, data=data)
+        response = requests.put(url, headers=headers, data=data)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
         return Response(response.json(), status = response.status_code)
@@ -141,15 +142,15 @@ class SingleEquipView(APIView):
         return Response(response.json(), status = response.status_code)
     def delete(self, request, pk):
         url = f"http://localhost:8001/equip/{pk}"
-        response = requests.get(url)
+        response = requests.delete(url)
         if response.status_code != 204:
             return Response(response.reason, status = response.status_code)
-        return Response(response.json(), status = response.status_code)
-    def put(self, request):
+        return Response(status = response.status_code)
+    def put(self, request, pk):
         url = f"http://localhost:8001/equip/{pk}"
         headers = {"Content-type": "application/json"}
         data = json.dumps(request.data)
-        response = requests.post(url, headers=headers, data=data)
+        response = requests.put(url, headers=headers, data=data)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
         return Response(response.json(), status = response.status_code)
@@ -193,12 +194,6 @@ class ContactMessage(APIView):
             return Response(response.reason, status = response.status_code)
         return Response(response.json(), status = response.status_code)
 class Subscibe(APIView):
-    def get(self, request):
-        url = "http://localhost:5002/sub"
-        response = requests.get(url)
-        if response.status_code != 200:
-            return Response(response.reason, status = response.status_code)
-        return Response(response.json(), status = response.status_code)
     def post(self, request):
         url = "http://localhost:5002/sub"
         headers = {"Content-type": "application/json"}
@@ -208,7 +203,14 @@ class Subscibe(APIView):
             return Response(response.reason, status = response.status_code)
         return Response(response.json(), status = response.status_code)
 
-
+class AllSubcribers(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        url = "http://localhost:5002/sub"
+        response = requests.get(url)
+        if response.status_code != 200:
+            return Response(response.reason, status = response.status_code)
+        return Response(response.json(), status = response.status_code)
 class UnSubscibe(APIView):
     def post(self, request):
         url = "http://localhost:5002/unsub"

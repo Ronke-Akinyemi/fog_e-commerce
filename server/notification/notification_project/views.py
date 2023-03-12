@@ -29,10 +29,10 @@ def contact():
         abort(400, description="Not a JSON")
     data = request.get_json()
     email = data.get("email")
-    if not check(email):
-        abort(400, description="Invalid email format")
     name = data.get("name")
     body = data.get("body")
+    if not check(email) or not name or not body:
+        abort(400, description="Invalid email format")
     msg = Message("FOG Agricultural service", sender = os.getenv("email"), recipients = [email])
     msg.body = f'Dear {name},\n\n\nThank you for taking your time to reach out to FOG agricultural services, We sincerely do appreciate it\n\nPlease note that your message will be looked into and feedback will be sent to you within a short period of time.\n\nOnce again, thanks for your time.\n\nWarm Regards,\n\nAina Adeyemi\n\nMD FOG Agric.'
     mail.send(msg)
@@ -53,11 +53,16 @@ def sub():
     from .import Newsletter
     from . import mail, db, Newsletter
     if request.method == "GET":
+        all = []
         subscribers = Newsletter.query.all()
-        return jsonify(subscribers), 200
+        for s in subscribers:
+            all.append(s.email)
+        return jsonify(all), 200
     else:
         data = request.get_json()
         email = data.get("email")
+        if not email or not check(email):
+            abort(400, description="Invalid email format")
         if Newsletter.query.filter_by(email = email).first():
             abort(400, description="You are already a subscriber")
             return jsonify(results)
@@ -71,6 +76,8 @@ def un_sub():
     from . import mail, db, Newsletter
     data = request.get_json()
     email = data.get("email")
+    if not email or not check(email):
+        abort(400, description="Invalid email format")
     subscriber = Newsletter.query.filter_by(email=email).first()
     if not subscriber:
         abort(400, description="User not a subscriber")
@@ -84,7 +91,7 @@ def news():
     data = request.get_json()
     message = data.get("message")
     subject = data.get("subject")
-    if (len(message) < 1 or len(subject) < 1):
+    if not message or not subject or (len(message) < 1 or len(subject) < 1):
         abort(400, description="Field can not be empty")
     subscribers = Newsletter.query.all()
     recipients = []

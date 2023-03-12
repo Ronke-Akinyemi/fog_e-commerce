@@ -33,7 +33,7 @@ class Bird(models.Model):
     weight = models.CharField(max_length = 50)
     source = models.CharField(max_length = 250)
     info = models.TextField()
-    image = models.ImageField(upload_to ='birds/', default="default_bird.png")
+    image = models.ImageField(upload_to ='fog/birds/',blank=True, null=True )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -50,7 +50,7 @@ class Crop(models.Model):
     info = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to ='crops/', default="default_crop.png")
+    image = models.ImageField(upload_to ='fog/crops/', blank=True, null=True)
     def __str__(self):
         return f"{self.name}: {self.id}"
 
@@ -63,6 +63,6 @@ class Equipment(models.Model):
     info = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to ='equipments/', default="default_equip.png")
+    image = models.ImageField(upload_to ='fog/equipments/', blank=True, null=True)
     def __str__(self):
         return f"{self.name}: {self.id}"
