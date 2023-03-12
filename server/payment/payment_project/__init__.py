@@ -11,7 +11,7 @@ DB_NAME = "payment.db"
 class Payment(db.Model):
     __tablename__ = "payments"
     id = db.Column(GUID, primary_key=True, default=GUID_DEFAULT_SQLITE)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    email = db.Column(db.String(120),nullable=False)
     date = db.Column(db.DateTime, nullable= False, default=datetime.utcnow)
     ref = db.Column(db.Integer(), unique=True, nullable=False)
     amount = db.Column(db.Integer(), nullable=False)

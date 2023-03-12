@@ -46,7 +46,7 @@ def contact():
     )
     db.session.add(new_contact)
     db.session.commit()
-    return jsonify({"message": "ok"}, 200)
+    return jsonify({"message": "ok"}), 200
 
 @views.route("/sub", methods=["GET", "POST"])
 def sub():
@@ -54,7 +54,7 @@ def sub():
     from . import mail, db, Newsletter
     if request.method == "GET":
         subscribers = Newsletter.query.all()
-        return jsonify(subscribers, 200)
+        return jsonify(subscribers), 200
     else:
         data = request.get_json()
         email = data.get("email")
@@ -64,7 +64,7 @@ def sub():
         new_subscriber = Newsletter(email = email)
         db.session.add(new_subscriber)
         db.session.commit()
-        return jsonify({"message":"ok"}, 200)
+        return jsonify({"message":"ok"}), 200
 
 @views.route("/unsub", methods = ["POST"])
 def un_sub():
@@ -76,7 +76,7 @@ def un_sub():
         abort(400, description="User not a subscriber")
     db.session.delete(subscriber)
     db.session.commit()
-    return jsonify({"message":"ok"}, 200)
+    return jsonify({"message":"ok"}), 200
 
 @views.route("/news", methods=["POST"])
 def news():
@@ -93,4 +93,4 @@ def news():
     msg = Message(subject, sender = os.getenv("email"), recipients = recipients)
     msg.body = message
     mail.send(msg)
-    return jsonify({"message":"ok"}, 200)
+    return jsonify({"message":"ok"}), 200
