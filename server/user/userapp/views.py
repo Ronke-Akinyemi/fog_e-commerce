@@ -25,6 +25,14 @@ class UserCreateView(generics.GenericAPIView):
             return Response(data=serializer.data, status = status.HTTP_201_CREATED)
         return Response(data = serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
+class AllProductView(APIView):
+    def get(self, request):
+        url = "http://localhost:8001"
+        response = requests.get(url)
+        if response.status_code != 200:
+            return Response(response.reason, status = response.status_code)
+        return Response(response.json(), status = response.status_code)
+    def post(self, request):
 class BirdView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):

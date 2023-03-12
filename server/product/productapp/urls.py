@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.ping, name = "ping"),
+    path("", views.AllProductView.as_view(), name = "ping"),
     path("bird", views.BirdView.as_view(), name="birds"),
     path("bird/<str:pk>", views.SingleBirdView.as_view(), name="single_bed"),
     path("crop", views.CropView.as_view(), name = "crops"),

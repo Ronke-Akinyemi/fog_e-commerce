@@ -7,13 +7,19 @@ from django.shortcuts import get_object_or_404
 import json
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
+from drf_multiple_model.views import ObjectMultipleModelAPIView
 # Create your views here.
 
 
-@api_view(["GET"])
-def ping(request):
-    message = {"reply": "ping"}
-    return Response(message)
+class AllProductView(ObjectMultipleModelAPIView):
+    querylist = [
+        {'queryset': Bird.objects.all(),
+        "serializer_class": BirdSerializer},
+        {'queryset': Crop.objects.all(),
+        "serializer_class": CropSerializer},
+        {'queryset': Equipment.objects.all(),
+        "serializer_class": EquipmentSerializer},
+    ]
 class BirdView(generics.GenericAPIView):
     serializer_class = BirdSerializer
     queryset = Bird.objects.all()

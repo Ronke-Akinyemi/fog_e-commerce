@@ -6,6 +6,7 @@ urlpatterns = [
     path("user", views.UserCreateView.as_view(), name="user"),
 
     # Product service
+    path("all", views.AllProductView.as_view(), name="all_product"),
     path("bird", views.BirdView.as_view(), name="birds"),
     path("bird/<str:pk>", views.SingleBirdView.as_view(), name="single_bed"),
     path("crop", views.CropView.as_view(), name = "crops"),
