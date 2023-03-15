@@ -5,6 +5,7 @@ from .serializers import UserSerializer
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
+from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 import json
 import requests
 
@@ -36,6 +37,7 @@ class AllProductView(APIView):
 
 class BirdView(APIView):
     # permission_classes = [IsAuthenticatedOrReadOnly]
+    parser_classes = [FormParser, MultiPartParser, JSONParser]
     def get(self, request):
         url = "http://localhost:8001/bird"
         response = requests.get(url)
@@ -44,9 +46,12 @@ class BirdView(APIView):
         return Response(response.json(), status = response.status_code)
     def post(self, request):
         url = "http://localhost:8001/bird"
-        headers = {"Content-type": "application/json"}
-        data = json.dumps(request.data)
-        response = requests.post(url, headers=headers, data=data)
+        # headers = {"Content-type": "application/json"}
+        data = request.data
+        files = request.FILES.get('image')
+        data["image"] = files
+        print(data)
+        response = requests.post(url, data=data)
         if response.status_code != 201:
             return Response(response.reason, status = response.status_code)
         return Response(response.json(), status = response.status_code)

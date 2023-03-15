@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Products } from '../components/Products'
 import { useContext } from 'react'
 import { CartContext } from '../App'
+import { ToastContainer, toast } from 'react-toastify';
+import { Loading } from '../components/Loading';
 
 export const Shop = () => {
 const bird = [
@@ -69,7 +71,7 @@ const crop = [
         }
     ]
 
-    const equip= [
+const equip= [
         {
             "id": "badf022a-793a-4179-9568-c3dc80cba56a",
             "name": "Imported maize",
@@ -107,11 +109,56 @@ const crop = [
             "image": null
         }
     ]
+
+const [isLoading, setIsLoading] = useState(false)
+// const [bird, setBird] = useState([])
+// const [crop, setCrop] = useState([])
+// const [equip, setEquip] = useState([])
+const [error, setError] = useState(null)
+// useEffect(()=>{
+//     const url = "http://localhost:8000/all"
+//         const abortCont = new AbortController();
+//     setIsLoading(true)
+//     // pass second arg to fetch for the sake of abort controller
+//         fetch(url, { signal: abortCont.signal })
+//         .then(res => {
+//         if (!res.ok){
+//             throw Error("Resources not found")
+//         }
+//         return res.json()
+//         })
+//         .then((data) => {
+//             console.log(data["Bird"])
+//         setBird(data["Bird"])
+//         setCrop(data["Crop"])
+//         setEquip(data["Equipment"])
+//         setError(null)
+//         setIsLoading(false)
+//         })
+//         .catch(error =>{
+//             //check for abort error
+//             if (error.name === 'AbortError'){
+//                 console.log("fetch aborted")
+//             }
+//             else{
+//                 setError(error.message)
+//                 setIsLoading(false)
+//             }
+//         })
+
+//         //clean up
+//         return () => abortCont.abort();
+//     }, []
+// )
+    const inform = () => toast.success("Item added to cart", {
+    position:"top-right"
+  })
     const [showModal, setModalShow] = useState(false)
     const [name, setName]= useState("")
     const [price, setPrice]= useState("")
     const [amount, setAmount] = useState("")
     const [quantity, setQuantity] = useState("")
+    const [info, setInfo] = useState("")
     const [item, setItem] = useState(null)
 
     const updateModel = (props) => {
@@ -120,6 +167,7 @@ const crop = [
         setPrice(props.price)
         setAmount(props.amount)
         setItem(props)
+        setInfo(props.info)
     }
     const hideModel = () => {
         setQuantity("")
@@ -135,16 +183,32 @@ const crop = [
         setAmount("")
         setQuantity("")
         setItem(null)
+        inform()
     }
   return (
     <div className='container-fluid'>
+        {isLoading ? <Loading/> :
+        <>
+        <ToastContainer/>
         {showModal && <>
-      <div className=''>
-        <div className='modal-content'>
+      <div className='modal-container'>
+        <div className='mud'>
+            <button type='button' onClick={hideModel} className="btn-close text-danger text-right bg-danger bco"></button>
             <form onSubmit={updateCart}>
-                <p>{name}</p>
-                <p>Unit price : {price}</p>
-                {quantity > 0 &&<><p>Quantity: {quantity}</p> <p>Amount: {amount}</p></>}
+
+              <h5 className="modal-title">{name}</h5>
+              <hr className="hr"></hr>
+                {/* <p>{name}</p> */}
+
+                <div className="modal-body">
+                  <p>{info}</p>
+                <hr className="hr"></hr>
+                <div className='row'>
+                  <p className='col-md-4'>Unit price :<p>N {price}</p></p>
+                {quantity > 0 &&<><p className='col-md-4'>Quantity: <p>{quantity}</p></p> <p className='col-md-4'>Amount: <p>{amount}</p></p></>}
+
+                </div>
+
                 <input
                 type="number"
                 value = {quantity}
@@ -155,27 +219,44 @@ const crop = [
                 }}
                 >
                 </input>
-                <button type='button' onClick={hideModel} >Close model</button>
-                {quantity > 0 && <div>
-                    <button>Add to cart</button>
-                </div>}
+                <hr className="hr"></hr>
+                <div className="justify-content-center mt-5 align-item-center d-flex gap-1">
+                        <button type="button" className="btn btn-secondary"  onClick={hideModel}>Close</button>
+                        {quantity > 0 && <button type="submit" className="btn btn-primary">Add to cart</button>
+                }
+                </div>
+
+                </div>
             </form>
 
         </div>
       </div>
       </>}
+      <p>Your sure plug for all agricultural services</p>
       <div className='row'>
-        <div className="text-center">Animal Section</div>
-        <Products prod={bird} updateModel ={updateModel}/>
+        <div className="p-5 text-center bg-warning">
+          <h4 class="mb-1">Animal Section</h4></div>
+        <div class="p-4">
+            <Products prod={bird} updateModel ={updateModel}/>
+        </div>
       </div>
       <div className='row'>
-        <div className="text-center">Crop Section</div>
-        <Products prod={crop} updateModel ={updateModel}/>
+        <div class="p-5 text-center bg-warning">
+          <h4 class="mb-1">Crops</h4>
+        </div>
+        <div className='p-4'>
+          <Products prod={crop} updateModel ={updateModel}/>
+        </div>
       </div>
       <div className='row'>
-        <div className="text-center">Farm Inputs</div>
-        <Products prod={equip} updateModel ={updateModel}/>
+        <div class="p-5 text-center bg-warning">
+          <h4 class="mb-1">Inputs</h4>
+        </div>
+        <div className='p-4'>
+          <Products prod={equip} updateModel ={updateModel}/>
+        </div>
       </div>
+      </>}
     </div>
 
   )

@@ -59,6 +59,7 @@ def pay():
     response = r.json()
     if not response['status']:
         abort(400, description = response['message'])
+    
     return jsonify(response)
 
 @views.route("/verify/<ref>")

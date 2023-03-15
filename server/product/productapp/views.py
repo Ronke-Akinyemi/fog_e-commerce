@@ -8,6 +8,7 @@ import json
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from drf_multiple_model.views import ObjectMultipleModelAPIView
+from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 # Create your views here.
 
 
@@ -22,6 +23,7 @@ class AllProductView(ObjectMultipleModelAPIView):
     ]
 class BirdView(generics.GenericAPIView):
     serializer_class = BirdSerializer
+    parser_classes = [FormParser, MultiPartParser, JSONParser]
     queryset = Bird.objects.all()
     def get(self, request):
         birds = Bird.objects.all()
@@ -30,7 +32,10 @@ class BirdView(generics.GenericAPIView):
         return Response(data= serializer.data, status =status.HTTP_200_OK)
         # return Response(data= serializer.errors, status= status.HTTP_400_BAD_REQUEST)
     def post(self, request):
+        # print(request.data)
+        print("A")
         data = request.data
+        print("B")
         serializer = self.serializer_class(data = data)
         if serializer.is_valid():
             serializer.save()
