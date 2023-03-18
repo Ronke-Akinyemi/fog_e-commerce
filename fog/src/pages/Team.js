@@ -45,7 +45,7 @@ export const Team = () => {
       <div className='container'>
         <h1 className="text-center text-dark"><b>MEET THE TEAM</b></h1>
         <p className="text-center text-muted">THE BRAINS BEHIND FOG</p>
-			  <br/><be/>
+			  <br/><br/>
         <div className='row'>
           {team.map((staff) => (
             <div className="col-lg-6 col-md-6 col-sm-12 mb-4" key={staff.name}>

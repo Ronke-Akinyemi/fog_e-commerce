@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { CartContext } from '../App'
 
-export const AddBird = () => {
+export const AddItem = (props) => {
     const user = useContext(CartContext).user
+    const signOut = useContext(CartContext).signOut()
     const [name, setName] = useState("")
     const [type, setType] = useState("")
     const [quantity, setQuantity] = useState(0)
@@ -63,35 +64,42 @@ if (image){
 }
 var requestOptions = {
   method: 'POST',
-  // headers: myHeaders,
   headers: {"Content-Type": "multipart/form-data; ; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW", "Authorization": `Bearer ${user.access}`},
   body: formdata,
   redirect: 'follow'
 };
 fetch("http://127.0.0.1:8001/bird", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+  .then(res => {
+    if (res.status === 200){
+
+    }
+    else if (Response.statusText === 'Unauthorized'){
+        signOut()
+    }
+  })
 }
   return (
-    <>
     <div className='m-5'>
-        <p>
-        <button onClick={() => {setAddAnimal(true);setAddCrop(false);
+        <div>
+            <div className='d-flex'>
+        <button className='btn btn-primary m-3' onClick={() => {setAddAnimal(true);setAddCrop(false);
             setName(""); setQuantity(0); setPrice(0); setInfo("");
             setAddEquip(false); setType("layers POL")}}>Add Animal</button>
-        <button onClick={() => {setAddAnimal(false);setAddCrop(true); setAddEquip(false);
+        <button className='btn btn-success m-3' onClick={() => {setAddAnimal(false);setAddCrop(true); setAddEquip(false);
             setName(""); setQuantity(0); setPrice(0); setInfo("");
             setType("maize")}}>Add Crop</button>
-        <button onClick={() => {setAddAnimal(false);setAddCrop(false);
+        <button className='btn btn-secondary m-3' onClick={() => {setAddAnimal(false);setAddCrop(false);
             setName(""); setQuantity(0); setPrice(0); setInfo("");
-            setAddEquip(true); setType("animal")}}>Add Equipment</button></p>
+            setAddEquip(true); setType("animal")}}>Add Equipment</button>
+            <button className='btn btn-danger m-3' onClick={props.toggleUpdate}>Switch to Update page</button>
+            </div>
+            </div>
         <h2 className='text-dark'>Add New {addAnimal && "Bird"}{addCrop && "Crop"}{addEquip && "Input"}</h2>
       <form onSubmit={submitForm} >
     <div className="row mb-4">
         <div className="col">
         <div className="form-outline">
-            <label className="form-label" for="form6Example7">Name</label>
+            <label className="form-label">Name</label>
             <input
                 className="form-control"
                 type="text"
@@ -105,7 +113,7 @@ fetch("http://127.0.0.1:8001/bird", requestOptions)
         </div>
         <div className="col">
         <div className="form-outline">
-            <label className="form-label" for="form6Example7">Type</label>
+            <label className="form-label">Type</label>
             <select
                 className="form-control"
                 value={type}
@@ -114,7 +122,7 @@ fetch("http://127.0.0.1:8001/bird", requestOptions)
                 >
                     {addAnimal && <>
                         <option  value="layers POL">layers Point of lay</option>
-                        <option selected value="layers POC">layers Point of Cage</option>
+                        <option value="layers POC">layers Point of Cage</option>
                         <option value="layers DOC">DOC Layers</option>
                         <option value="layers Spent">Spent Layers</option>
                         <option value="Broiler DOC">DOC Broiler</option>
@@ -142,7 +150,7 @@ fetch("http://127.0.0.1:8001/bird", requestOptions)
     <div className="row mb-4">
         <div className="col">
         <div className="form-outline">
-            <label className="form-label" for="form6Example7">Quantity</label>
+            <label className="form-label" >Quantity</label>
             <input
                 className="form-control"
                 type="number"
@@ -156,7 +164,7 @@ fetch("http://127.0.0.1:8001/bird", requestOptions)
         </div>
         <div className="col">
         <div className="form-outline">
-            <label className="form-label" for="form6Example7">Price</label>
+            <label className="form-label">Price</label>
             <input
                 className="form-control"
                 type="number"
@@ -173,7 +181,7 @@ fetch("http://127.0.0.1:8001/bird", requestOptions)
             <div className="row mb-4">
                 <div className="col">
                 <div className="form-outline">
-                    <label className="form-label" for="form6Example7">Age</label>
+                    <label className="form-label">Age</label>
                     <input
                         className="form-control"
                         type="text"
@@ -187,7 +195,7 @@ fetch("http://127.0.0.1:8001/bird", requestOptions)
                 </div>
                 <div className="col">
                 <div className="form-outline">
-                    <label className="form-label" for="form6Example7">Weight</label>
+                    <label className="form-label">Weight</label>
                     <input
                         className="form-control"
                         type="text"
@@ -202,7 +210,7 @@ fetch("http://127.0.0.1:8001/bird", requestOptions)
             </div>
 
         <div className="form-outline mb-4">
-            <label className="form-label" for="form6Example7">Source</label>
+            <label className="form-label">Source</label>
             <input
                     className="form-control"
                     type="text"
@@ -216,7 +224,7 @@ fetch("http://127.0.0.1:8001/bird", requestOptions)
     </>}
 
   <div className="form-outline mb-4">
-     <label className="form-label" for="form6Example7">Information</label>
+     <label className="form-label">Information</label>
     <textarea className="form-control" id="form6Example7" rows="4"
             required
               value={info}
@@ -226,7 +234,7 @@ fetch("http://127.0.0.1:8001/bird", requestOptions)
               ></textarea>
   </div>
   <div className="form-outline mb-4">
-    <label className="form-label" for="form6Example7">Image</label>
+    <label className="form-label">Image</label>
     <input
     className="form-control"
     type="file"
@@ -239,6 +247,5 @@ fetch("http://127.0.0.1:8001/bird", requestOptions)
   <button type="submit" className="btn btn-primary btn-block mb-4">Add Item</button>
         </form>
     </div>
-    </>
   )
 }

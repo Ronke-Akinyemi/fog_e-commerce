@@ -9,6 +9,7 @@ export const Footer = () => {
   const subForm =(e) => {
     e.preventDefault()
     const data = {email}
+    console.log(data)
     inform()
   }
   const d = new Date();
@@ -23,12 +24,14 @@ export const Footer = () => {
 
       <a className="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/FogAgricServices/"
 						target="_blank" role="button"
+            rel="noopener noreferrer"
         ><i className="fa fa-facebook-f"></i
       ></a>
 
       <a className="btn btn-outline-light btn-floating m-1" 
             href="https://twitter.com/fogagric"
 						target="_blank"
+            rel="noopener noreferrer"
             role="button"
         ><i className="fa fa-twitter"></i
       ></a>
@@ -37,6 +40,7 @@ export const Footer = () => {
       <a className="btn btn-outline-light btn-floating m-1"
             href="mailto:Fog.agricservices@gmail.com"
 						target="_blank"
+            rel="noopener noreferrer"
             role="button"
         ><i className="fa fa-google"></i
       ></a>
@@ -45,6 +49,7 @@ export const Footer = () => {
       <a className="btn btn-outline-light btn-floating m-1"
             href="https://www.instagram.com/p/CefgUy_K70K/?igshid=YmMyMTA2M2Y="
 						target="_blank" role="button"
+            rel="noopener noreferrer"
         ><i className="fa fa-instagram"></i
       ></a>
 
@@ -52,6 +57,7 @@ export const Footer = () => {
       <a className="btn btn-outline-light btn-floating m-1"
           href="https://www.linkedin.com/in/fog-agric-services-0ab7aa241/"
           target="_blank"
+          rel="noopener noreferrer"
           role="button"
         ><i className="fa fa-linkedin"></i
       ></a>
@@ -60,6 +66,7 @@ export const Footer = () => {
       <a className="btn btn-outline-light btn-floating m-1"
             href="https://wa.me/message/LV26DZO7RWCFE1"
 						target="_blank"
+            rel="noopener noreferrer"
             role="button"
         ><i className="fa fa-whatsapp"></i
       ></a>
