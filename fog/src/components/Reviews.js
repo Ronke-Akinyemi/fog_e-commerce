@@ -1,26 +1,42 @@
 import React from 'react'
 import Carousel from 'react-multi-carousel';
+// import tecno from '../images/tecno1.jpg'
 
 
 export const Reviews = () => {
     const reviews = [
         {
-            "name":""
-        }
+            "name":"Mr UZOMA",
+            "image": "../images/tecno1.jpg",
+            "words": "FOG is my eveyday go to company. No better reliable and trustworthy source than FOG",
+            "title": "CEO Simdis Farms"
+        },
+        {
+            "name":"Mr Jerry",
+            "image": "../images/tecno1.jpg",
+            "words": "Fog Agric services is a reliable source I do get my agricultural needs. Their service is top notch with fast and excellent delivery",
+            "title": "CEO Jerryjo Farms"
+        },
+        {
+            "name":"Mr Ernest Uzebo",
+            "image": "../images/tecno1.jpg",
+            "words": "When it comes to Fast, reliable, trustworthy and efficient delivery, I give it to FOG agricultural services",
+            "title": "CEO Beta Agro and Allied Services"
+        },
     ]
     const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 1024 },
-    items: 5
+    items: 1
   },
   desktop: {
     breakpoint: { max: 1024, min: 800 },
-    items: 4
+    items: 1
   },
   tablet: {
     breakpoint: { max: 800, min: 464 },
-    items: 2
+    items: 1
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -30,12 +46,11 @@ export const Reviews = () => {
   return (
     <Carousel responsive={responsive}>
         {reviews.map((rev) => (
-            <div key={rev.nam}>
-                <div><image src ={rev.image}/></div>
-                <div>
+            <div key={rev.name} className="align-item-center justify-content-center m-5 p-5 row">
+                <div className='col-md-5' ><img src={rev.image} alt="client" height="300px" width="300px"/></div>
+                <div className='col-md-7 mt-5'>
                     <p>{rev.words}</p>
                     <hr className='hr'></hr>
-                    <p>{rev.words}</p>
                     <p>{rev.title}</p>
                 </div>
             </div>

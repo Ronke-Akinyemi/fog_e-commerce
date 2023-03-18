@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Products } from '../components/Products'
 import { useContext } from 'react'
 import { CartContext } from '../App'
@@ -114,7 +114,6 @@ const [isLoading, setIsLoading] = useState(false)
 // const [bird, setBird] = useState([])
 // const [crop, setCrop] = useState([])
 // const [equip, setEquip] = useState([])
-const [error, setError] = useState(null)
 // useEffect(()=>{
 //     const url = "http://localhost:8000/all"
 //         const abortCont = new AbortController();
@@ -233,27 +232,29 @@ const [error, setError] = useState(null)
       </div>
       </>}
       <p>Your sure plug for all agricultural services</p>
-      <div className='row'>
-        <div className="p-5 text-center bg-warning">
-          <h4 class="mb-1">Animal Section</h4></div>
-        <div class="p-4">
-            <Products prod={bird} updateModel ={updateModel}/>
+      <div>
+        <div className='row'>
+          <div className="p-5 text-center bg-warning">
+            <h4 className="mb-1">Animal Section</h4></div>
+          <div className="p-4">
+              <Products prod={bird} updateModel ={updateModel}/>
+          </div>
         </div>
-      </div>
-      <div className='row'>
-        <div class="p-5 text-center bg-warning">
-          <h4 class="mb-1">Crops</h4>
+        <div className='row'>
+          <div className="p-5 text-center bg-warning">
+            <h4 className="mb-1">Crops</h4>
+          </div>
+          <div className='p-4'>
+            <Products prod={crop} updateModel ={updateModel}/>
+          </div>
         </div>
-        <div className='p-4'>
-          <Products prod={crop} updateModel ={updateModel}/>
-        </div>
-      </div>
-      <div className='row'>
-        <div class="p-5 text-center bg-warning">
-          <h4 class="mb-1">Inputs</h4>
-        </div>
-        <div className='p-4'>
-          <Products prod={equip} updateModel ={updateModel}/>
+        <div className='row'>
+          <div className="p-5 text-center bg-warning">
+            <h4 className="mb-1">Inputs</h4>
+          </div>
+          <div className='p-4'>
+            <Products prod={equip} updateModel ={updateModel}/>
+          </div>
         </div>
       </div>
       </>}

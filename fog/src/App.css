@@ -126,3 +126,271 @@
         transform: rotate(360deg);
     }
 }
+nav a.active{
+    font-weight: bold;
+    /* text-decoration: underline solid purple;   */
+}
+
+
+.navbarF{
+  position: fixed;
+  display: none;
+}
+
+/* HERO
+================================================== */
+.hero {
+  background: url(/images/heroImage.jpg) center no-repeat;
+  height: 700px;
+  width: 100%;
+  /* padding: 200px; */
+  display: table;
+  position: relative;
+  background-size: cover;
+}
+
+.hero-content {
+  color: #ffffff;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+}
+
+.hero-content h1 {
+  width: 100%;
+  padding: 0 15px;
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 auto;
+  text-transform: uppercase;
+}
+.background-overlay:before {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.hero-content p {
+  padding: 0 15px;
+  margin: 30px auto 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.hero-content .hero-job {
+  font-size: 18px;
+}
+
+.hero-content .hero-job span {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ffffff;
+}
+
+.hero-content .hero-job-desc {
+  font-size: 14px;
+  max-width: 700px;
+}
+
+.hero-arrow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  width: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-arrow a {
+  font-size: 28px;
+  color: #ffffff;
+}
+
+@media only screen and (max-width: 767px) {
+  /* HEADER */
+  /* HERO */
+  .hero-content h1 {
+    font-size: 32px;
+  }
+  .hero-content p {
+    margin: 20px auto 0;
+  }
+}
+
+.site-section {
+  padding: 100px 0;
+}
+
+.site-section h2 {
+  font-family: "Varela", sans-serif;
+  margin: 0;
+  font-size: 32px;
+  color: #196fc2;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+
+
+.section-skills {
+  background-color: #f6f6f6;
+}
+
+.section-skills h2 {
+  position: relative;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  font-size: 18px;
+  color: #000;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.section-skills h2:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: #000;
+}
+
+.section-skills p {
+  margin: 10px 0 0;
+}
+
+.progress-group p {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.progress-group + .progress-group {
+  margin-top: 20px;
+}
+
+.progress {
+  position: relative;
+  margin: 10px 0 0;
+  background-color: #666;
+  border-radius: 0;
+  height: 10px;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.progress-bar {
+  position: relative;
+  background-color: #196fc2;
+  height: 10px;
+}
+
+.progress-bar {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: -10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 15px 20px 15px;
+  border-color: transparent transparent #f6f6f6 transparent;
+  z-index: 1;
+}
+
+.progress-bar span {
+  width: 40px !important;
+  position: absolute;
+  top: -30px;
+  right: -7px;
+  color: #000;
+  z-index: 3;
+}
+
+@media only screen and (max-width: 767px) {
+  /* Section: Skills */
+  .section-skills .col-sm-6 + .col-sm-6 {
+    margin-top: 40px;
+  }
+  .section-skills h2 {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .secO{
+    margin-top: 350px;
+  }
+}
+.history{
+  /* background: url(/images/history_BG.jpeg) no-repeat; */
+  height: 400px;
+  width: 100%;
+  padding: 50px;
+}
+.history-text{
+  background-color: #029547;
+  border-top-right-radius: 1%;
+  border-bottom-left-radius: 1%;
+  border-bottom-right-radius: 1%;
+  border-top-left-radius: 1%;
+  padding:5%;
+  padding-bottom: 0;
+  color: #ffffff;
+  /* margin-right: 0px; */
+}
+
+/* Team style */
+
+.main-Team{
+	padding: 100px 0;
+}
+
+.shadow {
+	box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.profile-card {
+	padding-bottom: 60px !important;
+}
+.profile-card .profile-card_image img {
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	object-fit: cover;
+	border: 4px solid #fff;
+}
+.profile-card .profile-card_social {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+.profile-card .profile-card_social img {
+	width: 33px;
+	margin: 5px 10px;
+}
+
+/* End of team styling */
+
+#dark {
+    background-color: #151515;
+}
+
+#dark .card{
+    background-color: red;
+}
+
+#dark p, h1, h2, h3, h4, h5, h6, span{
+    color: #ffffff;
+}
+/* .inT:hover{
+  width: 35%;
+} */
+/* #light p, h1, h2, h3, h4, h5, h6, span{
+    color: #000000;
+} */

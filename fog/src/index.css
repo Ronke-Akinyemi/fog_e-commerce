@@ -44,3 +44,9 @@ body {
   background-color: yellow;
   border-radius: 50%;
 }
+
+.revBox{
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

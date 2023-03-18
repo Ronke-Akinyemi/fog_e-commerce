@@ -9,8 +9,22 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from drf_multiple_model.views import ObjectMultipleModelAPIView
 from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
+from .serializers import UserSerializer
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 # Create your views here.
 
+
+
+class UserCreateView(generics.GenericAPIView):
+    serializer_class = UserSerializer
+    def post(self, request):
+        data = request.data
+        serializer = self.serializer_class(data = data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data=serializer.data, status = status.HTTP_201_CREATED)
+        print(serializer.errors)
+        return Response(data = serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
 class AllProductView(ObjectMultipleModelAPIView):
     querylist = [
@@ -25,6 +39,7 @@ class BirdView(generics.GenericAPIView):
     serializer_class = BirdSerializer
     parser_classes = [FormParser, MultiPartParser, JSONParser]
     queryset = Bird.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
         birds = Bird.objects.all()
         serializer = self.serializer_class(birds, many =True)
@@ -32,10 +47,7 @@ class BirdView(generics.GenericAPIView):
         return Response(data= serializer.data, status =status.HTTP_200_OK)
         # return Response(data= serializer.errors, status= status.HTTP_400_BAD_REQUEST)
     def post(self, request):
-        # print(request.data)
-        print("A")
         data = request.data
-        print("B")
         serializer = self.serializer_class(data = data)
         if serializer.is_valid():
             serializer.save()
@@ -44,6 +56,8 @@ class BirdView(generics.GenericAPIView):
 
 class SingleBirdView(generics.GenericAPIView):
     serializer_class = BirdSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    parser_classes = [FormParser, MultiPartParser, JSONParser]
     queryset = Bird.objects.all()
     def get(self, request, pk):
         bird = get_object_or_404(Bird, pk = pk)
@@ -64,7 +78,9 @@ class SingleBirdView(generics.GenericAPIView):
 
 class CropView(generics.GenericAPIView):
     serializer_class = CropSerializer
+    parser_classes = [FormParser, MultiPartParser, JSONParser]
     queryset = Crop.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
         crops = Crop.objects.all()
         serializer = self.serializer_class(crops, many =True)
@@ -80,6 +96,8 @@ class CropView(generics.GenericAPIView):
         return Response(data= serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
 class SingleCropView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    parser_classes = [FormParser, MultiPartParser, JSONParser]
     serializer_class = CropSerializer
     queryset = Crop.objects.all()
     def get(self, request, pk):
@@ -103,7 +121,9 @@ class SingleCropView(generics.GenericAPIView):
 
 class EquipView(generics.GenericAPIView):
     serializer_class = EquipmentSerializer
+    parser_classes = [FormParser, MultiPartParser, JSONParser]
     queryset = Equipment.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
         equipments = Equipment.objects.all()
         serializer = self.serializer_class(equipments, many =True)
@@ -121,6 +141,8 @@ class EquipView(generics.GenericAPIView):
 class SingleEquipView(generics.GenericAPIView):
     serializer_class = EquipmentSerializer
     queryset = Equipment.objects.all()
+    parser_classes = [FormParser, MultiPartParser, JSONParser]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request, pk):
         equipment = get_object_or_404(Equipment, pk = pk)
         serializer = self.serializer_class(equipment)
@@ -137,7 +159,23 @@ class SingleEquipView(generics.GenericAPIView):
         equipment = get_object_or_404(Equipment, pk = pk)
         equipment.delete()
         return Response(status= status.HTTP_204_NO_CONTENT)
+class GetPaymentHistory(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        url = "http://localhost:5001"
+        response = requests.get(url)
+        if response.status_code != 200:
+            return Response(response.reason, status = response.status_code)
+        return Response(response.json(), status = response.status_code)
 
+class AllSubcribers(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        url = "http://localhost:5002/sub"
+        response = requests.get(url)
+        if response.status_code != 200:
+            return Response(response.reason, status = response.status_code)
+        return Response(response.json(), status = response.status_code)
 class GetPrices(APIView):
     def get (self, requests, pk):
         try:
@@ -161,3 +199,14 @@ class GetPrices(APIView):
             return Response(equip.price, status =status.HTTP_200_OK)
         else:
             return Response(data= {"message": "invalid id"}, status= status.HTTP_400_BAD_REQUEST)
+
+class Newsletter(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        url = "http://localhost:5002/news"
+        headers = {"Content-type": "application/json"}
+        data = json.dumps(request.data)
+        response = requests.post(url, headers=headers, data=data)
+        if response.status_code != 200:
+            return Response(response.reason, status = response.status_code)
+        return Response(response.json(), status = response.status_code)

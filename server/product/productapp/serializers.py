@@ -1,7 +1,22 @@
 from rest_framework import serializers
 from .models import Bird, Crop, Equipment
+from django.contrib.auth.hashers import make_password
 
+from django.contrib.auth.models import User
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["username", "password", "email"]
+
+    def validate_password(self, value: str) -> str:
+        """
+        Hash value passed by user.
+
+        :param value: password of a user
+        :return: a hashed version of the password
+        """
+        return make_password(value)
 
 
 option = (
@@ -12,17 +27,19 @@ option = (
         ("Broiler DOC","Broiler DOC"),
         ("Broiler 8 weeks","Broiler 8 weeks"),
         ("Turkey DOC","Turkey DOC"),
-        ("layers Table size","layers Table size"),
+        ("Others","Others"),
         ("Broiler Table Size","Broiler Table Size")
     )
 crop_type = (
     ("maize", "maize"),
     ("cassava", "cassava"),
     ("yam", "yam"),
+    ("Others","Others"),
     ("rice", "rice")
 )
 equip_type = (
     ("crop", "crop"),
+    ("Others","Others"),
     ("animal", "animal")
 )
 

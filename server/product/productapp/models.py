@@ -10,17 +10,19 @@ option = (
         ("Broiler DOC","Broiler DOC"),
         ("Broiler 8 weeks","Broiler 8 weeks"),
         ("Turkey DOC","Turkey DOC"),
-        ("layers Table size","layers Table size"),
+        ("Others","Others"),
         ("Broiler Table Size","Broiler Table Size")
     )
 crop_type = (
     ("maize", "maize"),
     ("cassava", "cassava"),
+    ("Others","Others"),
     ("yam", "yam"),
     ("rice", "rice")
 )
 equip_type = (
     ("crop", "crop"),
+    ("Others","Others"),
     ("animal", "animal")
 )
 class Bird(models.Model):

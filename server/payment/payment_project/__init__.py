@@ -7,6 +7,7 @@ from datetime import datetime
 
 db = SQLAlchemy()
 DB_NAME = "payment.db"
+# hL#YDHFCnRPY
 
 class Payment(db.Model):
     __tablename__ = "payments"

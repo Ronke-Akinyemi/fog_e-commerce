@@ -9,7 +9,14 @@ export const Contact = () => {
     const sendContact = (e) => {
         e.preventDefault()
         const data = {name, email, body}
-        console.log(data)
+        fetch('http://localhost:8000/contact', {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data)
+        })
+        .then((res) => {
+            return res.json()
+        })
         setName("")
         setEmail("")
         setBody("")
@@ -23,11 +30,11 @@ export const Contact = () => {
     <>
     <ToastContainer/>
     <section className="mt-5 pt-5 pb-4 justify-content-center">
-	<h3 className="text-center">Get in Touch</h3>
+	<h3 className="text-center text-dark">Get in Touch</h3>
 	<p className="text-center w-responsive mx-auto mb-5">Do you have a message for us, feel free to get in touch with us</p>
 	<div className="h-100 d-flex align-items-center justify-content-center mt-5">
 		<button className="btn btn-info btn-lg m-2 justify-content-center text-center" id="contbtn" onClick={() => setShowForm(!showForm)}>
-			{showForm ? <span>Hide form</span> : <span>Contact me</span> }
+			{showForm ? <span>Hide form</span> : <span>Contact Us</span> }
 		</button>
 
 	</div>

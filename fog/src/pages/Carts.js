@@ -8,9 +8,9 @@ import { Loading } from '../components/Loading';
 
 export const Carts = () => {
   const cart = useContext(CartContext).cart
-  const [cartLength, setCartlength] = useState(cart.length)
+  const [cartLength] = useState(cart.length)
   const deleteItem = useContext(CartContext).deleteItem
-  const updateCart = useContext(CartContext).updateCart
+  // const updateCart = useContext(CartContext).updateCart
   const [modal, setModal] = useState(false)
   const showModal = () => setModal(true)
   const [email, setEmail] = useState("")
