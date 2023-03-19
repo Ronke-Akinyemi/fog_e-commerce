@@ -34,9 +34,7 @@ const [user, setUser] = useState(localStorage.getItem("fogUser") ? JSON.parse(lo
 const signIn = (props) => {
   setUser(props)
 }
-const signOut = () => {
-  setUser(null)
-}
+
 const deleteItem = (props) => {
   setCart(cart.filter(item => item.id !== props))
 }
@@ -50,7 +48,6 @@ const [equip, setEquip] = useState([])
 useEffect(()=>{
     const url = "http://localhost:8000/all"
         const abortCont = new AbortController();
-        setIsLoading(true)
     // pass second arg to fetch for the sake of abort controller
         fetch(url, { signal: abortCont.signal })
         .then(res => {
@@ -63,9 +60,10 @@ useEffect(()=>{
             setBird(data["Bird"])
             setCrop(data["Crop"])
             setEquip(data["Equipment"])
+            updateToken()
             setIsLoading(false)
         })
-        .catch(error =>{
+        .catch(() =>{
             //check for abort error
                 setIsLoading(false)
         })
@@ -75,42 +73,38 @@ useEffect(()=>{
     }, []
 )
 let updateToken = async ()=> {
-  if (user){
-
-    let response = await fetch('http://127.0.0.1:8001/api/token/refresh/', {
+  if (user !== null){
+    fetch('http://127.0.0.1:8001/api/token/refresh/', {
         method:'POST',
         headers:{
             'Content-Type':'application/json'
         },
         body:JSON.stringify({'refresh':user.refresh})
     })
-
-    let data = await response.json()
-
-    if (response.status === 200){
-        setUser(data)
-    }else{
-        signOut()
-    }
-    if(isLoading){
-        setIsLoading(false)
-    }
+    .then(res => {
+      if (!res.ok){
+        throw Error("Invalid")
+      }
+      return res.json()
+    })
+    .then(data => setUser(data))
+    .catch(() => {
+      setUser(null)
+    })
+    // if(isLoading){
+    //     setIsLoading(false)
+    // }
   }
     }
 useEffect(()=> {
-        if(isLoading){
-            updateToken()
-        }
-
         let fourMinutes = 1000 * 60 * 4
 
         let interval =  setInterval(()=> {
-            if(user){
+            if(user !== null){
                 updateToken()
             }
         }, fourMinutes)
         return ()=> clearInterval(interval)
-
     }, [user, isLoading])
 // const bird = [
 //         {
@@ -245,7 +239,7 @@ useEffect(() => {
 }, [cart, user])
   return(
     <div className='App' id={theme}>
-      <CartContext.Provider value={{updateCart, deleteItem, cart, changeTheme, theme, user, signIn, signOut}}>
+      <CartContext.Provider value={{updateCart, deleteItem, cart, changeTheme, theme, user, signIn, setUser}}>
         {/* <ToastContainer> */}
         <ItemContext.Provider value={{bird, crop, equip}}>
           <Navigation/>
@@ -255,12 +249,13 @@ useEffect(() => {
               <Route path="/team" element= {<Team/>}></Route>
               <Route path="/cart" element= {<Carts />}></Route>
                 <Route path="/admin" element = {<RequireAuth><Admin/></RequireAuth>}></Route>
+                {/* <Route path="/admin" element = {<Admin/>}></Route> */}
                 <Route path="/shop" element= {<Shop/>}></Route>
               <Route path="/tecno" element= {<Tecno/>}></Route>
               <Route path="*" element={<NotFound/>} />
             </Routes>
-            <Contact/>
           </>}
+          <Contact/>
           <Footer/>
         {/* </ToastContainer> */}
         </ItemContext.Provider>

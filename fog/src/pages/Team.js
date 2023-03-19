@@ -59,16 +59,16 @@ export const Team = () => {
                   <p className="text-muted">{staff.text}</p>
                 </div>
                 <div className="profile-card_social text-center p-4">
-                  <a href={staff.ln} class="d-inline-block">
+                  <a href={staff.ln} className="d-inline-block">
                     <img src="./images/social/linkedin.png" alt="Linkedin"/>
                   </a>
-                  <a href={staff.tw} class="d-inline-block">
+                  <a href={staff.tw} className="d-inline-block">
                     <img src="./images/social/twitter.png" alt="Twitter"/>
                   </a>
-                  <a href={staff.fb} class="d-inline-block">
+                  <a href={staff.fb} className="d-inline-block">
                     <img src="./images/social/facebook.png" alt="Facebook"/>
                   </a>
-                  <a href={staff.wa} class="d-inline-block">
+                  <a href={staff.wa} className="d-inline-block">
                     <img src="./images/social/whatsapp.png" alt="whatsapp"/>
                   </a>
                 </div>

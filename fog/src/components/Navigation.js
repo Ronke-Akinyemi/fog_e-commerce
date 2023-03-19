@@ -13,7 +13,20 @@ const Navigation = () => {
     <nav className="navbar navbar-expand-lg p-3 text-white" style={{"backgroundColor" : "rgb(2,149,71)"}}>
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">FOG</NavLink>
-		<div className='navbar-nav switch'>{cart.theme === "light" ? "Light mode" : "Dark mode"}<ReactSwitch onChange={cart.changeTheme} checked={cart.theme === "light"}/></div>
+		<div className='navbar-nav switch'>
+			{/* {cart.theme === "light" ? "Light mode" : "Dark mode"} */}
+		<ReactSwitch
+		 onColor="#86d3ff"
+            onHandleColor="#2693e6"
+            handleDiameter={20}
+            uncheckedIcon={false}
+            checkedIcon={false}
+            boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+            activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+            height={20}
+            width={48}
+		onChange={cart.changeTheme} checked={cart.theme === "light"}/>
+		</div>
 					<button
 						className="navbar-toggler"
 						type="button"
@@ -77,7 +90,7 @@ const Navigation = () => {
 							<li className="nav-item">
 								<NavLink
 									className="nav-link mx-2" onClick={() => {
-										cart.signOut()
+										localStorage.removeItem("fogUser")
 									}}
 									>Logout</
 								NavLink>

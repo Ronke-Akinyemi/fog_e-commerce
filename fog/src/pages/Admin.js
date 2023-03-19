@@ -3,7 +3,7 @@ import { AddItem } from '../components/AddItem'
 import { UpdateItem } from '../components/UpdateItem'
 
 export const Admin = () => {
-     const [update, setUpdate] = useState(true)
+     const [update, setUpdate] = useState(false)
      const toggleUpdate = () => {
       setUpdate(!update)
      }

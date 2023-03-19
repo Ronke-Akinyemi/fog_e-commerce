@@ -72,7 +72,7 @@ class SingleBirdView(generics.GenericAPIView):
             return Response(data=serializer.data, status =status.HTTP_200_OK)
         return Response(data= serializer.errors, status= status.HTTP_400_BAD_REQUEST)
     def delete(self, request, pk):
-        bird = get_object_or_404(Bird, pk = pk)
+        bird = get_object_or_404(Bird, pk=pk)
         bird.delete()
         return Response(status= status.HTTP_204_NO_CONTENT)
 
@@ -154,6 +154,7 @@ class SingleEquipView(generics.GenericAPIView):
         if serializer.is_valid():
             serializer.save()
             return Response(data=serializer.data, status =status.HTTP_200_OK)
+            console.log(serializer.errors)
         return Response(data= serializer.errors, status= status.HTTP_400_BAD_REQUEST)
     def delete(self, request, pk):
         equipment = get_object_or_404(Equipment, pk = pk)
