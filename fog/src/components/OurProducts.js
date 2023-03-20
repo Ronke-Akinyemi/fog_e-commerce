@@ -2,7 +2,7 @@ import React from 'react'
 
 export const OurProducts = () => {
   return (
-    <section className="site-section section-skills secO">
+    <section className="site-section section-skills">
 				<div className="container">
 					<div className="row">
 						<div className="col-sm-6">

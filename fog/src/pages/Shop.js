@@ -89,26 +89,30 @@ export const Shop = () => {
         </div>
       </div>
       </>}
-      <p>Your sure plug for all agricultural services</p>
+          <div className="row">
+        <div className="col-md-12 text-center m-3">
+          <h3 className="animate-charcter">Your sure plug for all agricultural services</h3>
+        </div>
+      </div>
       <div>
         <div className='row'>
-          <div className="p-5 text-center bg-warning">
+          <div className="p-3 text-center bg-warning">
             <h4 className="mb-1">Animal Section</h4></div>
           <div className="p-4">
               <Products prod={bird} updateModel ={updateModel}/>
           </div>
         </div>
         <div className='row'>
-          <div className="p-5 text-center bg-warning">
-            <h4 className="mb-1">Crops</h4>
+          <div className="p-3 text-center bg-warning">
+            <h4 className="mb-1">Crop Section</h4>
           </div>
           <div className='p-4'>
             <Products prod={crop} updateModel ={updateModel}/>
           </div>
         </div>
         <div className='row'>
-          <div className="p-5 text-center bg-warning">
-            <h4 className="mb-1">Inputs</h4>
+          <div className="p-3 text-center bg-warning">
+            <h4 className="mb-1">Agricultural inputs section</h4>
           </div>
           <div className='p-4'>
             <Products prod={equip} updateModel ={updateModel}/>

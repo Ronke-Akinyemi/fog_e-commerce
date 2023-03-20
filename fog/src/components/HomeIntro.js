@@ -3,7 +3,7 @@ import React from 'react'
 export const HomeIntro = () => {
   return (
     <div >
-        <div className='row p-5 g-4 align-items-center justify-content-center'>
+        <div className='row p-5 g-4 align-items-center justify-content-center mt-3'>
             <div className="col-lg-3 col-md-5 col-sm-11 m-1 mb-4 bg-success inT">
                 <h2 className='text-center p-4'>About us</h2>
                 <p>
@@ -15,7 +15,7 @@ export const HomeIntro = () => {
                     availability of safe and wholesome agricultural outputs for the nation.
                 </p>
             </div>
-            <div className="col-lg-3 col-md-5 col-sm-11 m-1 mb-4 bg-white inT"  style={{"width": "35%"}}>
+            <div className="col-lg-3 col-md-5 col-sm-11 m-1 mb-4 bg-white inT">
                 <h2 className='text-center text-dark p-4'>WHAT WE DO</h2>
                 <p>
                     We supply properly vaccinated point of lay and point of cage birds nationwide
