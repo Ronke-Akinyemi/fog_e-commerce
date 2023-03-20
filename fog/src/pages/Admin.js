@@ -8,10 +8,11 @@ export const Admin = () => {
       setUpdate(!update)
      }
   return (
-    <>
+    <div className='container-fluid'>
     {!update ?
     <AddItem toggleUpdate = {toggleUpdate}/> :
-    <UpdateItem toggleUpdate = {toggleUpdate}/>}
-    </>
+    <UpdateItem toggleUpdate = {toggleUpdate}/>
+    }
+    </div>
   )
 }

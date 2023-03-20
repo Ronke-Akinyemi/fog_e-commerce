@@ -10,23 +10,31 @@ export const UpdateItem = (props) => {
   return (
     <div className='m-5'>
         <div>
-            <div className='d-flex'>
-        <button className='btn btn-primary m-3' onClick={() => {
-            setShowBird(true)
-            setShowCrop(false)
-            setShowEquip(false)
-        }}>Edit Animal</button>
-        <button className='btn btn-success m-3' onClick={() => {
-            setShowBird(false)
-            setShowCrop(true)
-            setShowEquip(false)
-        }}>Edit Crop</button>
-        <button className='btn btn-secondary m-3' onClick={() => {
-            setShowBird(false)
-            setShowCrop(false)
-            setShowEquip(true)
-        }}>Edit Equipment</button>
-        <button className='btn btn-danger m-3'  onClick={props.toggleUpdate}>Add new Item</button>
+            <div className='row gx-2'>
+                <div className='col-2 m-2'>
+                    <button className='btn btn-primary' onClick={() => {
+                        setShowBird(true)
+                        setShowCrop(false)
+                        setShowEquip(false)
+                    }}>Edit Animal</button>
+                </div>
+                <div className='col-2 m-2'>
+                    <button className='btn btn-success' onClick={() => {
+                        setShowBird(false)
+                        setShowCrop(true)
+                        setShowEquip(false)
+                    }}>Edit Crop</button>
+                </div>
+                <div className='col-2 m-2'>
+                    <button className='btn btn-secondary' onClick={() => {
+                        setShowBird(false)
+                        setShowCrop(false)
+                        setShowEquip(true)
+                    }}>Edit Equipment</button>
+                </div>
+                <div className='col-2 m-2'>
+                    <button className='btn btn-danger'  onClick={props.toggleUpdate}>Add new Item</button>
+                </div>
             </div>
             {showBird && <EditBird/>}
             {showCrop && <EditCrop/>}

@@ -6,22 +6,22 @@ import Carousel from 'react-multi-carousel';
 export const Reviews = () => {
     const reviews = [
         {
-            "name":"Mr UZOMA",
-            "image": "../images/tecno1.jpg",
-            "words": "FOG is my eveyday go to company. No better reliable and trustworthy source than FOG",
-            "title": "CEO Simdis Farms"
-        },
-        {
             "name":"Mr Jerry",
-            "image": "../images/tecno1.jpg",
+            "image": "../images/reviews/rev2.jpg",
             "words": "Fog Agric services is a reliable source I do get my agricultural needs. Their service is top notch with fast and excellent delivery",
             "title": "CEO Jerryjo Farms"
         },
         {
             "name":"Mr Ernest Uzebo",
-            "image": "../images/tecno1.jpg",
+            "image": "../images/reviews/rev3.jpg",
             "words": "When it comes to Fast, reliable, trustworthy and efficient delivery, I give it to FOG agricultural services",
             "title": "CEO Beta Agro and Allied Services"
+        },
+        {
+            "name":"Mr UZOMA",
+            "image": "../images/reviews/rev1.jpg",
+            "words": "FOG is my eveyday go to company. No better reliable and trustworthy source than FOG",
+            "title": "CEO Simdis Farms"
         },
     ]
     const responsive = {
@@ -46,8 +46,8 @@ export const Reviews = () => {
   return (
     <Carousel responsive={responsive}>
         {reviews.map((rev) => (
-            <div key={rev.name} className="align-item-center justify-content-center m-5 p-5 row">
-                <div className='col-md-5' ><img src={rev.image} alt="client" height="300px" width="300px"/></div>
+            <div key={rev.name} className="align-item-center justify-content-center m-5 p-5 row hiS">
+                <div className='col-md-5' ><img src={rev.image} alt="client" height="300px" width="300px" className='rounded-circle'/></div>
                 <div className='col-md-7 mt-5'>
                     <p>{rev.words}</p>
                     <hr className='hr'></hr>

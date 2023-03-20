@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import { CartContext } from '../App'
 import { useContext } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../components/Loading';
 
@@ -16,6 +16,8 @@ export const Carts = () => {
   const [email, setEmail] = useState("")
   const [isLoading, setIsloading] = useState(false)
   const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
+  const [address, setAddress] = useState("")
   const navigate = useNavigate()
   const hideModel = () => {
     setModal(false)
@@ -33,13 +35,13 @@ export const Carts = () => {
   })
   const makePayment = (e) => {
     setIsloading(true)
+    if (!email || !phone || !address || !name) return;
     let data = []
     e.preventDefault()
-
     cart.forEach(element => {
     data.push({"id": element.id, "quantity": element.quantity})
   });
-    const item = {email, "data": data}
+    const item = {email, name, phone, address, "data": data}
     fetch('http://localhost:5001/pay', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
@@ -67,7 +69,6 @@ export const Carts = () => {
       <>
       {cartLength ? 
       <>
-    <ToastContainer/>
     <div className='justify-content-center m-3 p-2'>
 
       <Table striped bordered hover>
@@ -106,29 +107,64 @@ export const Carts = () => {
         </tbody>
       </Table>
       <p className='justify-content-center align-items-center'>Total: {total}</p>
-      <button onClick={showModal}>Check out</button>
+      <button onClick={showModal} type="button" className="btn btn-primary">Check out</button>
     </div>
     <div>
       {modal && <div className='modal-container'>
         <div className='mud'>
-          <button type='button' onClick={hideModel} ><span aria-hidden="true">&times;</span></button>
-          Total : {total}
+          <div className="canBtnBG">
+            <button type='button' className="canBtn" onClick={hideModel} ><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div align-items-left>
+            <h1>
+              Total :N {total}
+            </h1>
+          </div>
             <div>
             <form onSubmit={makePayment}>
-              <label>Name</label><br></br>
-              <input
-              type="text"
-              required
-              value = {name}
-              onChange = {(e) => setName(e.target.value)}
-              ></input><br></br>
-              <label> <i class="fa fa-envelope prefix grey-text"></i> Email</label><br></br>
-              <input
-              type="email"
-              required
-              value = {email}
-              onChange = {(e) => setEmail(e.target.value)}
-              ></input><br></br>
+              <div className='row'>
+                <div className='col-sm-6 form-outline' >
+                  <label className="form-label oA">Name</label><br></br>
+                    <input
+                     className="form-control"
+                    type="text"
+                    required
+                    value = {name}
+                    onChange = {(e) => setName(e.target.value)}
+                    ></input>
+                </div>
+                <div className='col-sm-6 form-outline' >
+                  <label className="form-label oA"> <i class="fa fa-envelope prefix grey-text"></i> Email</label><br></br>
+                  <input
+                  className="form-control"
+                  type="email"
+                  required
+                  value = {email}
+                  onChange = {(e) => setEmail(e.target.value)}
+                  ></input>
+                </div>
+              </div>
+                <div className='col'>
+                  <label className="form-label oA"> <i class="fa fa-phone prefix grey-text"></i> Phone Number</label><br></br>
+                  <input
+                   className="form-control"
+                    type="tel"
+                    required
+                    value = {phone}
+                    onChange = {(e) => setPhone(e.target.value)}
+                    ></input>
+                </div>
+                <div className='col'>
+                  <label className="form-label oA"> <i class="fa fa-map-marker prefix grey-text"></i> Address</label><br></br>
+                  <textarea
+                   className="form-control" rows="4"
+                   required
+                    value = {address}
+                    onChange = {(e) => setAddress(e.target.value)}
+                    >
+                  </textarea>
+                </div>
+
               <div className="justify-content-center mt-5 align-item-center d-flex gap-1">
                         <button type="button" className="btn btn-secondary"  onClick={hideModel}>Close</button>
                         <button type="submit" className="btn btn-primary">Pay Online</button>

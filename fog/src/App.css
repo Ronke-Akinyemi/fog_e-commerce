@@ -136,7 +136,10 @@ nav a.active{
   position: fixed;
   display: none;
 }
-
+.abT{
+  background: url(/images/fog_logo3.jpg) center no-repeat;
+  background-size: 40%;
+}
 /* HERO
 ================================================== */
 .hero {
@@ -164,6 +167,18 @@ nav a.active{
   text-align: center;
   margin: 0 auto;
   text-transform: uppercase;
+  animation: neon 1s ease 5;
+}
+@keyframes neon {
+    0%,
+    100% {
+        text-shadow: 0 0 10px #ef00e3a8, 0 0 20px #ef00e3a8, 0 0 20px #ef00e3a8, 0 0 20px #ef00e3a8, 0 0 2px #fed128, 2px 2px 2px #806914;
+        color: #f5efcb;
+    }
+    50% {
+        text-shadow: 0 0 2px #800e0b, 0 0 5px #800e0b, 0 0 5px #800e0b, 0 0 5px #800e0b, 0 0 2px #800e0b, 4px 4px 2px #40340a;
+        color: #eda0d3;
+    }
 }
 .background-overlay:before {
   content: '';
@@ -212,6 +227,15 @@ nav a.active{
   color: #ffffff;
 }
 
+.hiS{
+  background-color: #ffffff;
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+	border-top-right-radius: 12px;
+	border-bottom-right-radius: 12px;
+	border-width: 0;
+	border: solid 3px whitesmoke;
+}
 
 .site-section {
   padding: 100px 0;
@@ -306,7 +330,8 @@ nav a.active{
 /* Team style */
 
 .main-Team{
-	padding: 100px 0;
+	padding: 50px;
+  padding-bottom: 10px;
 }
 
 .shadow {
@@ -329,9 +354,17 @@ nav a.active{
 	bottom: 0;
 	width: 100%;
 }
-.profile-card .profile-card_social img {
+.profile-card .profile-card_social a {
 	width: 33px;
+  border: 1px solid #196fc2;
+  border-radius: 50%;
+  padding: 1%;
+  background-color: #fff;
 	margin: 5px 10px;
+}
+.profile-card .profile-card_social a:hover{
+  background-color: #196fc2;
+  color: #fff;
 }
 
 /* End of team styling */
@@ -391,23 +424,90 @@ nav a.active{
   }
 }
 
+.card h2, .mud h5 {
+  color: #000;
+}
+.canBtnBG{
+  text-align: end;
 
+}
+.canBtn{
+  background-color: #f51a1a;
+}
 
+.product--image {
+  width: 100%;
+  height: 16em;
+  object-fit: cover;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 320px;
+  margin: auto 1rem;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+.oA{
+  color: #000;
+}
 
 #dark {
     background-color: #151515;
 }
 
 #dark .card{
-    background-color: red;
+    background-color: #FFD700;
 }
-
 #dark p, h1, h2, h3, h4, h5, h6, span{
     color: #ffffff;
 }
-/* .inT:hover{
-  width: 35%;
+#dark .hiS{
+  background-color: #151515;
+}
+#dark .section-skills{
+  background-color: #151515;
+}
+#dark .section-skills h2 {
+  color: #FFD700;
+  font-weight: 1000;
+  font-size: 25px;
+
+}
+/* #dark .cR, #dark .tN{
+  background-color: #FFD700;
 } */
-/* #light p, h1, h2, h3, h4, h5, h6, span{
-    color: #000000;
+/* #dark .GIT{
+  background-color: #FFD700;
 } */
+#dark .formLab, #dark .mN, #dark .hr, #dark .oA, #dark th, #dark td{
+  color: #FFD700;
+}
+
+#dark .price{
+  color: #000;
+}
+#dark .mud {
+  background-color: #151515;
+}

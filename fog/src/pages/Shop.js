@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Products } from '../components/Products'
 import { useContext } from 'react'
 import { CartContext, ItemContext } from '../App'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export const Shop = () => {
 
@@ -46,14 +46,15 @@ export const Shop = () => {
     }
   return (
     <div className='container-fluid'>
-        <ToastContainer/>
         {showModal && <>
       <div className='modal-container'>
         <div className='mud'>
-            <button type='button' onClick={hideModel} className="btn-close text-danger text-right bg-danger bco"></button>
+          <div className="canBtnBG">
+              <button type='button' onClick={hideModel} className="btn-close text-right bg-danger canBtn"></button>
+          </div>
             <form onSubmit={updateCart}>
 
-              <h5 className="modal-title">{name}</h5>
+              <h5 className="mN">{name}</h5>
               <hr className="hr"></hr>
                 {/* <p>{name}</p> */}
 
@@ -61,8 +62,8 @@ export const Shop = () => {
                   <p>{info}</p>
                 <hr className="hr"></hr>
                 <div className='row'>
-                  <p className='col-md-4'>Unit price :<p>N {price}</p></p>
-                {quantity > 0 &&<><p className='col-md-4'>Quantity: <p>{quantity}</p></p> <p className='col-md-4'>Amount: <p>{amount}</p></p></>}
+                  <p className='col-md-4 mN'>Unit price :<p>N {price}</p></p>
+                {quantity > 0 &&<><p className='col-md-4 mN'>Quantity: <p>{quantity}</p></p> <p className='col-md-4 mN'>Amount: <p>{amount}</p></p></>}
 
                 </div>
 
@@ -90,7 +91,7 @@ export const Shop = () => {
       </div>
       </>}
           <div className="row">
-        <div className="col-md-12 text-center m-3">
+        <div className="col text-center m-5">
           <h3 className="animate-charcter">Your sure plug for all agricultural services</h3>
         </div>
       </div>

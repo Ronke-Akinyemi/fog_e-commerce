@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { CartContext } from '../App'
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../components/Loading';
@@ -79,7 +79,6 @@ export const Tecno = () => {
     <>
     {isloading ? <Loading/> : 
     <>
-    <ToastContainer/>
     {showLogin ?
     <div className='text-center justify-content-center p-5'>
       <h2>Log in</h2>

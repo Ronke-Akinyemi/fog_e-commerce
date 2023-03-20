@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { CartContext } from '../App'
 import { Loading } from './Loading'
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 
 export const AddItem = (props) => {
     const user = useContext(CartContext).user
@@ -79,28 +79,35 @@ export const AddItem = (props) => {
     }
   return (
     <div className='m-5'>
-        <ToastContainer/>
         {isLoading ? <Loading/> : <>
             <div>
-                <div className='d-flex'>
-            <button className='btn btn-primary m-3' onClick={() => {setAddAnimal(true);setAddCrop(false);
-                setName(""); setQuantity(0); setPrice(0); setInfo("");
-                setAddEquip(false); setType("layers POL")}}>Add Animal</button>
-            <button className='btn btn-success m-3' onClick={() => {setAddAnimal(false);setAddCrop(true); setAddEquip(false);
-                setName(""); setQuantity(0); setPrice(0); setInfo("");
-                setType("maize")}}>Add Crop</button>
-            <button className='btn btn-secondary m-3' onClick={() => {setAddAnimal(false);setAddCrop(false);
-                setName(""); setQuantity(0); setPrice(0); setInfo("");
-                setAddEquip(true); setType("animal")}}>Add Equipment</button>
-                <button className='btn btn-danger m-3' onClick={props.toggleUpdate}>Switch to Update page</button>
+                <div className='row gx-2'>
+                    <div className='col-2 m-2'>
+                        <button className='btn btn-primary' onClick={() => {setAddAnimal(true);setAddCrop(false);
+                            setName(""); setQuantity(0); setPrice(0); setInfo("");
+                            setAddEquip(false); setType("layers POL")}}>Add Animal</button>
+                    </div>
+                    <div className='col-2 m-2'>
+                        <button className='btn btn-success' onClick={() => {setAddAnimal(false);setAddCrop(true); setAddEquip(false);
+                            setName(""); setQuantity(0); setPrice(0); setInfo("");
+                            setType("maize")}}>Add Crop</button>
+                    </div>
+                    <div className='col-2 m-2'>
+                        <button className='btn btn-secondary' onClick={() => {setAddAnimal(false);setAddCrop(false);
+                            setName(""); setQuantity(0); setPrice(0); setInfo("");
+                            setAddEquip(true); setType("animal")}}>Add Equipment</button>
+                    </div>
+                    <div className='col-4 m-2'>
+                        <button className='btn btn-danger' onClick={props.toggleUpdate}>Update page</button>
+                    </div>
                 </div>
                 </div>
-            <h2 className='text-dark'>Add New {addAnimal && "Bird"}{addCrop && "Crop"}{addEquip && "Input"}</h2>
+            <h2 className='oA'>Add New {addAnimal && "Bird"}{addCrop && "Crop"}{addEquip && "Input"}</h2>
         <form onSubmit={submitForm} >
         <div className="row mb-4">
             <div className="col">
             <div className="form-outline">
-                <label className="form-label">Name</label>
+                <label className="form-label oA">Name</label>
                 <input
                     className="form-control"
                     type="text"
@@ -114,7 +121,7 @@ export const AddItem = (props) => {
             </div>
             <div className="col">
             <div className="form-outline">
-                <label className="form-label">Type</label>
+                <label className="form-label oA">Type</label>
                 <select
                     className="form-control"
                     value={type}
@@ -151,7 +158,7 @@ export const AddItem = (props) => {
         <div className="row mb-4">
             <div className="col">
             <div className="form-outline">
-                <label className="form-label" >Quantity</label>
+                <label className="form-label oA" >Quantity</label>
                 <input
                     className="form-control"
                     type="number"
@@ -165,7 +172,7 @@ export const AddItem = (props) => {
             </div>
             <div className="col">
             <div className="form-outline">
-                <label className="form-label">Price</label>
+                <label className="form-label oA">Price</label>
                 <input
                     className="form-control"
                     type="number"
@@ -182,7 +189,7 @@ export const AddItem = (props) => {
                 <div className="row mb-4">
                     <div className="col">
                     <div className="form-outline">
-                        <label className="form-label">Age</label>
+                        <label className="form-label oA">Age</label>
                         <input
                             className="form-control"
                             type="text"
@@ -196,7 +203,7 @@ export const AddItem = (props) => {
                     </div>
                     <div className="col">
                     <div className="form-outline">
-                        <label className="form-label">Weight</label>
+                        <label className="form-label oA">Weight</label>
                         <input
                             className="form-control"
                             type="text"
@@ -211,7 +218,7 @@ export const AddItem = (props) => {
                 </div>
 
             <div className="form-outline mb-4">
-                <label className="form-label">Source</label>
+                <label className="form-label  oA">Source</label>
                 <input
                         className="form-control"
                         type="text"
@@ -225,7 +232,7 @@ export const AddItem = (props) => {
         </>}
 
     <div className="form-outline mb-4">
-        <label className="form-label">Information</label>
+        <label className="form-label  oA">Information</label>
         <textarea className="form-control" id="form6Example7" rows="4"
                 required
                 value={info}
@@ -235,7 +242,7 @@ export const AddItem = (props) => {
                 ></textarea>
     </div>
     <div className="form-outline mb-4">
-        <label className="form-label">Image</label>
+        <label className="form-label oA">Image</label>
         <input
         className="form-control"
         type="file"

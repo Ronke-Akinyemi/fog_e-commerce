@@ -31,10 +31,10 @@ export const Products = (props) => {
         {props.prod.map((item) =>(
             <div className="card" key={item.id}>
                 <img className="product--image" src={item.image ? item.image : "https://res.cloudinary.com/djkpvbgmj/raw/upload/v1/media/fog/birds/IMG_20210513_084704_717_transcpr_rlqldv.jpg"} alt="product" />
-                <h2>{item.name}</h2>
-                <p className="price">Price: N {item.price}</p>
-                {item.age && <p>Age: {item.age}</p>}
-                <p className='price'>Quantity: {item.quantity}</p>
+                <h2 >{item.name}</h2>
+                <p className="price ">Price: N {item.price}</p>
+                {item.age && <p className='price'>Age: {item.age}</p>}
+                <p className='price '>Quantity: {item.quantity}</p>
                 <p>
                     <button type='button' onClick={() => {props.updateModel(item)}}>Add to Cart</button>
                 </p>

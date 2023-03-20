@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { ItemContext } from '../App'
 import { CartContext } from '../App'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Loading } from './Loading';
 
 export const EditCrop = () => {
@@ -14,12 +14,14 @@ export const EditCrop = () => {
     const [price, setPrice] = useState(crop.price)
     const [info, setInfo] = useState(crop.info)
     const [image, setImage] = useState(null)
+    const [modal, setModal] = useState(false)
     const [isLoading, setIsloading] = useState(false)
     const user = useContext(CartContext).user
     const inform = () => toast.success("Item Updated", {
     position:"top-right"
     })
      const del = () =>toast.success("Item Deleted", {position:"top-right"})
+     const hideModel = () => setModal(false)
 
     const changeCrop = (crop) => {
             const selected = allCrop.filter(b => {
@@ -74,6 +76,7 @@ export const EditCrop = () => {
     }
         const deleteItem = () => {
         var myHeaders = new Headers();
+        setModal(false)
         setIsloading(true)
         myHeaders.append("Authorization", `Bearer ${user.access}`);
         myHeaders.append("Content-Type", "application/json")
@@ -104,29 +107,42 @@ export const EditCrop = () => {
     }
   return (
     <div className='container'>
-        <ToastContainer/>
         {isLoading ? <Loading/> : <>
             {!showCrop ?
             <div className='row'>
                 {allCrop.map(crop => (
                     <button
                     onClick={() => changeCrop(crop.id)}
-                    className='col-md-3 bg-warning m-2' key={crop.id}>
-                        <h3 className='text-dark'>{crop.name}</h3>
-                        <p>Edit</p>
+                    className='col-md-3 m-2 uD' key={crop.id}>
+                        <h3 className='oA'>{crop.name}</h3>
+                        <p className='text-dark'>Edit</p>
                     </button>
                 ))}
             </div> :
             <div>
-                <div className='text-right'>
-                    <button type='button' onClick={() => setShow(false)} className="btn-close text-danger text-right bg-danger"></button>
+                {modal && <div className='modal-container'>
+                        <div className='mud'>
+                        <div className="canBtnBG">
+                            <button type='button' className="canBtn" onClick={hideModel} ><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div align-items-left>
+                            <p>Confirm Delete</p>
+                            <button type='button' className='btn btn-danger' onClick={deleteItem}>Yes</button>
+                        </div>
+                            <div>
+
+                        </div>
+                        </div>
+                    </div>}
+                <div className="canBtnBG">
+                    <button type='button' onClick={() => setShow(false)} className="btn-close bg-danger canBtn"></button>
                 </div>
-                <h3 className='text-dark'>Edit</h3>
+                <h3 className='oA'>Edit</h3>
                 <form onSubmit={submitForm} >
                     <div className="row mb-4">
                         <div className="col">
                         <div className="form-outline">
-                            <label className="form-label">Name</label>
+                            <label className="form-label oA">Name</label>
                             <input
                                 className="form-control"
                                 type="text"
@@ -140,7 +156,7 @@ export const EditCrop = () => {
                         </div>
                         <div className="col">
                         <div className="form-outline">
-                            <label className="form-label">Type</label>
+                            <label className="form-label oA">Type</label>
                             <select
                                 className="form-control"
                                 value={type}
@@ -159,7 +175,7 @@ export const EditCrop = () => {
                     <div className="row mb-4">
                         <div className="col">
                         <div className="form-outline">
-                            <label className="form-label" >Quantity</label>
+                            <label className="form-label oA" >Quantity</label>
                             <input
                                 className="form-control"
                                 type="number"
@@ -173,7 +189,7 @@ export const EditCrop = () => {
                         </div>
                         <div className="col">
                         <div className="form-outline">
-                            <label className="form-label">Price</label>
+                            <label className="form-label oA">Price</label>
                             <input
                                 className="form-control"
                                 type="number"
@@ -188,7 +204,7 @@ export const EditCrop = () => {
                     </div>
 
                 <div className="form-outline mb-4">
-                    <label className="form-label">Information</label>
+                    <label className="form-label oA">Information</label>
                     <textarea className="form-control" id="form6Example7" rows="4"
                             required
                             value={info}
@@ -198,7 +214,7 @@ export const EditCrop = () => {
                             ></textarea>
                 </div>
                 <div className="form-outline mb-4">
-                    <label className="form-label">Image</label>
+                    <label className="form-label oA">Image</label>
                     <input
                     className="form-control"
                     type="file"
@@ -208,8 +224,14 @@ export const EditCrop = () => {
 
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block mb-4">Edit Item</button>
-                <button type="button"onClick={deleteItem} className="btn btn-danger btn-block mb-4 ml-4">Delete Item</button>
+                <div className='row gx-4 align-items-center'>
+                    <div className='mb-4 col-sm-4' >
+                        <button type="submit" className="btn btn-primary btn-block ">Edit Item</button>
+                    </div>
+                    <div className='mb-4 col-sm-4' >
+                        <button type="button" onClick={() => setModal(true)} className="btn btn-danger btn-block mb-4 ml-4 col-sm-4">Delete Item</button>
+                    </div>
+                </div>
                         </form>
             </div>}
         </>}

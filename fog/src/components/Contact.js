@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 
 export const Contact = () => {
     const [showForm, setShowForm] = useState(false)
@@ -28,9 +28,8 @@ export const Contact = () => {
   })
   return (
     <>
-    <ToastContainer/>
     <section className="mt-5 pt-5 pb-4 justify-content-center">
-	<h3 className="text-center text-dark">Get in Touch</h3>
+	<h3 className="text-center oA GIT">Get in Touch</h3>
 	<p className="text-center w-responsive mx-auto mb-5">Do you have a message for us, feel free to get in touch with us</p>
 	<div className="h-100 d-flex align-items-center justify-content-center mt-5">
 		<button className="btn btn-info btn-lg m-2 justify-content-center text-center" id="contbtn" onClick={() => setShowForm(!showForm)}>
@@ -54,7 +53,7 @@ export const Contact = () => {
 
                     <div className="col-md-6">
                         <div className="md-form mb-0">
-                            <label>Your name</label>
+                            <label className='formLab'>Your name</label>
 							<input
                             onChange={(e) => setName(e.target.value)}
                             type="text" name="name" className="form-control" value={name} required/>
@@ -62,7 +61,7 @@ export const Contact = () => {
                     </div>
                     <div className="col-md-6">
                         <div className="md-form mb-0">
-							<label className="">Your email</label>
+							<label className="formLab">Your email</label>
                             <input
                             onChange={(e) => setEmail(e.target.value)} value={email}
                             type="text" name="email" className="form-control" required/>
@@ -77,7 +76,7 @@ export const Contact = () => {
                     <div className="col-md-12">
 
                         <div className="md-form">
-							<label >Your message</label>
+							<label className="formLab">Your message</label>
                             <textarea
                             value={body} onChange={(e) => setBody(e.target.value)}
                             type="text" name="message" rows="2" required className="form-control md-textarea"></textarea>

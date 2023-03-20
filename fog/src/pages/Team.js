@@ -5,46 +5,49 @@ export const Team = () => {
     {
       "name" : "AINA ADEYEMI",
       "title" : "Sales and Marketting Manager",
-      "text" : "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum ab eum magni nobis autem dolorum!",
-      "image": "./images/tecno1.jpg",
-      "fb": "https://www.facebook.com",
-      "ln": "https://www.facebook.com",
-      "tw": "https://www.facebook.com"
+      "text" : "An experienced animal health technologist passionate about agric business",
+      "image": "./images/teams/tecno.jpg",
+      "ml": "mailto:ainaadeyemi7@gmail.com",
+      "ln": "https://www.linkedin.com/in/aina-adeyemi-6ab98ba3",
+      "tw": "https://twitter.com/adeyemiaina5",
+      "wa": "https://wa.me/+2348062929576"
     },
     {
       "name" : "AKODOGBO OLORUNWA",
       "title" : "Head of operations",
-      "text" : "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum ab eum magni nobis autem dolorum!",
-      "image": "./images/tecno1.jpg",
-      "fb": "https://www.facebook.com",
-      "ln": "https://www.facebook.com",
-      "tw": "https://www.facebook.com"
+      "text" : "Certified animal health technologist with vast experience in agric business, farm management and human management",
+      "image": "./images/teams/ako.jpg",
+      "ml": "mailto:olorunwaakodogbo@gmail.com",
+      "ln": "https://www.linkedin.com/in/olorunwa-akodogbo-7575bb161",
+      "tw": "https://twitter.com/olorunwa_",
+      "wa": "https://wa.me/+2348139326554"
     },
     {
       "name" : "OBILADE OLUWATOBI",
       "title" : "Field Manager",
-      "text" : "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum ab eum magni nobis autem dolorum!",
-      "image": "./images/tecno1.jpg",
-      "fb": "https://www.facebook.com",
-      "ln": "https://www.facebook.com",
-      "tw": "https://www.facebook.com",
-      "wa": "http://+23470686859"
+      "text" : "Animal scientist with huge experience in farm development, management and marketting",
+      "image": "./images/teams/tobi.jpg",
+      "ml": "mailto:obiladeoluwatobi@gmail.com",
+      "ln": "#",
+      "tw": "https://twitter.com/ObiladeOluwato2",
+      "wa": "https://wa.me/+2348164742664"
     },
     {
       "name" : "AKINOLA SAMSON",
-      "title" : "Senior Software Engineer",
-      "text" : "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum ab eum magni nobis autem dolorum!",
-      "image": "./images/tecno1.jpg",
-      "fb": "https://www.facebook.com",
-      "ln": "https://www.facebook.com",
-      "tw": "https://www.facebook.com"
+      "title" : "Software Engineer",
+      "text" : "An experienced Fullstack software enginner with many software skills in his arsenal, A certified Animal scientist",
+      "image": "./images/teams/pop.jpg",
+      "fb": "mailto:akinolasamson1234@gmail.com",
+      "ln": "https://www.linkedin.com/in/akinola-samson-438458124",
+      "tw": "https://twitter.com/Samson_Akinola1",
+      "wa": "https://wa.me/+2348069482021"
     }
   ]
   return (
     <section className="main-Team">
       <div className='container'>
-        <h1 className="text-center text-dark"><b>MEET THE TEAM</b></h1>
-        <p className="text-center text-muted">THE BRAINS BEHIND FOG</p>
+        <h1 className="text-center oA"><b>MEET THE TEAM</b></h1>
+        <p className="text-center text-muted oA">THE BRAINS BEHIND FOG</p>
 			  <br/><br/>
         <div className='row'>
           {team.map((staff) => (
@@ -58,20 +61,24 @@ export const Team = () => {
                   <p className="text-muted">{staff.title}</p>
                   <p className="text-muted">{staff.text}</p>
                 </div>
-                <div className="profile-card_social text-center p-4">
-                  <a href={staff.ln} className="d-inline-block">
-                    <img src="./images/social/linkedin.png" alt="Linkedin"/>
-                  </a>
-                  <a href={staff.tw} className="d-inline-block">
-                    <img src="./images/social/twitter.png" alt="Twitter"/>
-                  </a>
-                  <a href={staff.fb} className="d-inline-block">
-                    <img src="./images/social/facebook.png" alt="Facebook"/>
-                  </a>
-                  <a href={staff.wa} className="d-inline-block">
-                    <img src="./images/social/whatsapp.png" alt="whatsapp"/>
-                  </a>
-                </div>
+                <div className="social-icons small profile-card_social text-center p-4">
+													<a href={staff.tw} target="_blank" className="rectangle"
+														rel="noopener noreferrer"
+                            ><i className="fa fa-twitter"></i
+													></a>
+													<a href={staff.ln} target="_blank"
+														rel="noopener noreferrer"
+                            ><i className="fa fa-linkedin"></i
+													></a>
+													<a href={staff.ml} target="_blank" className="rectangle"
+														rel="noopener noreferrer"
+                            ><i className="fa fa-envelope"></i
+													></a>
+                          <a href={staff.wa} target="_blank" className="rectangle"
+														rel="noopener noreferrer"
+                            ><i className="fa fa-whatsapp"></i
+													></a>
+												</div>
               </div>
             </div>
           ))}

@@ -23,7 +23,7 @@ export const Home = () => {
     </div>
     <div>
       <div className="text-center">
-        <h3 className='text-dark mt-5'>CLIENTS REVIEWS</h3>
+        <h3 className='oA mt-5 cR'>CLIENTS REVIEWS</h3>
       </div>
       <Reviews/>
     </div>
