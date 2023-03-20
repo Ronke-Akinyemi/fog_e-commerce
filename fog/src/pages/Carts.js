@@ -68,7 +68,7 @@ export const Carts = () => {
       {isLoading ? <Loading/> :
       <>
       {cartLength ?
-      <>
+      <div className='m-3 p-3'>
     <div className='container-fluid'>
       <div className='table-responsive'>
         <Table striped bordered hover>
@@ -178,6 +178,6 @@ export const Carts = () => {
         </div>
       </div>}
     </div>
-   </> : <p>No item in cart, go home</p>} </>}</div>
+   </div> : <p>No item in cart, go home</p>} </>}</div>
   )
 }
