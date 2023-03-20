@@ -1,0 +1,69 @@
+version: "3.8"
+services:
+  fog:
+    build:
+      context: ./fog
+      dockerfile: Dockerfile
+    container_name: fog
+    ports:
+      - "3000:3000"
+    volumes:
+      - './fog:/usr/app'
+      - '/usr/app/node_module'
+    environment:
+      - CHORKIDAR_USEPOLLING=true
+    depends_on:
+      - user
+      - payment
+      - product
+      - notification
+  user:
+    build:
+      context: ./server/user
+      dockerfile: Dockerfile
+    container_name: user
+    ports:
+      - "8000:8000"
+    volumes:
+      - './server/user:/usr/app'
+      - '/usr/app/node_module'
+    environment:
+      - CHORKIDAR_USEPOLLING=true
+    depends_on:
+      - payment
+  product:
+    build:
+      context: ./server/product
+      dockerfile: Dockerfile
+    container_name: product
+    ports:
+      - "8001:8001"
+    volumes:
+      - './server/product:/usr/app'
+      - '/usr/app/node_module'
+    environment:
+      - CHORKIDAR_USEPOLLING=true
+  notification:
+    build:
+      context: ./server/notification
+      dockerfile: Dockerfile
+    container_name: notification
+    ports:
+      - "5001:5001"
+    volumes:
+      - './server/notification:/usr/app'
+      - '/usr/app/node_module'
+    environment:
+      - CHORKIDAR_USEPOLLING=true
+  payment:
+    build:
+      context: ./server/payment
+      dockerfile: Dockerfile
+    container_name: payment
+    ports:
+      - "5002:5002"
+    volumes:
+      - './server/payment:/usr/app'
+      - '/usr/app/node_module'
+    environment:
+      - CHORKIDAR_USEPOLLING=true

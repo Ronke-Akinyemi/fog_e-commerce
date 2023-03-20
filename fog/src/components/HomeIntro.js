@@ -17,7 +17,7 @@ export const HomeIntro = () => {
             </div>
             <div className="col-lg-3 col-md-5 col-sm-11 m-1 mb-4 bg-white p-5 abT inT">
                 <h2 className='text-center oA p-4'>WHAT WE DO</h2>
-                <p style={{"fontWeight": 500, "color": "red"}}>
+                <p style={{"fontWeight": 500, "color": "#000"}}>
                     We supply properly vaccinated point of lay and point of cage birds nationwide
                     We Supply healthy Day old chicks such as broilers, turkey, noiler, Pullet and guinea fowl
                     Supply of all forms of livestock equipments
