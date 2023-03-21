@@ -1,21 +1,21 @@
 version: "3.8"
 services:
-  fog:
-    build:
-      context: ./fog
-      dockerfile: Dockerfile
-    container_name: fog
-    ports:
-      - "3000:3000"
-    expose:
-      - "3000"
-    environment:
-      - CHORKIDAR_USEPOLLING=true
-    depends_on:
-      - user
-      - payment
-      - product
-      - notification
+  # fog:
+  #   build:
+  #     context: ./fog
+  #     dockerfile: Dockerfile
+  #   container_name: fog
+  #   ports:
+  #     - "3000:3000"
+  #   expose:
+  #     - "3000"
+  #   environment:
+  #     - CHORKIDAR_USEPOLLING=true
+  #   depends_on:
+  #     - user
+  #     - payment
+  #     - product
+  #     - notification
   user:
     build:
       context: ./server/user
@@ -26,6 +26,8 @@ services:
       - '/usr/app/node_module'
     environment:
       - CHORKIDAR_USEPOLLING=true
+    ports:
+      - "8007:8000"
     depends_on:
       - payment
   product:
@@ -38,6 +40,8 @@ services:
     volumes:
       - './server/product:/usr/app'
       - '/usr/app/node_module'
+    ports:
+      - "8008:8000"
     environment:
       - CHORKIDAR_USEPOLLING=true
       - SECRET_KEY=$SECRET_KEY
