@@ -52,7 +52,7 @@ export const EditCrop = () => {
         body: formdata,
         redirect: 'follow'
         };
-        fetch(`product/crop/${crop.id}`, requestOptions)
+        fetch(`http://fog-prod.popsicool.tech/crop/${crop.id}`, requestOptions)
         .then(response => {
             if (!response.ok)
             {
@@ -80,7 +80,7 @@ export const EditCrop = () => {
         setIsloading(true)
         myHeaders.append("Authorization", `Bearer ${user.access}`);
         myHeaders.append("Content-Type", "application/json")
-        fetch(`product/crop/${crop.id}`, {
+        fetch(`http://fog-prod.popsicool.tech/crop/${crop.id}`, {
             method : 'DELETE',
             headers: myHeaders
         })

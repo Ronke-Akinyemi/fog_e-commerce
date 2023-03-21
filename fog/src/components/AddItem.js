@@ -42,13 +42,13 @@ export const AddItem = (props) => {
         }
         let url;
         if(addAnimal){
-            url = "product/bird"
+            url = "bird"
         }
         else if(addCrop){
-            url = "product/crop"
+            url = "crop"
         }
         else{
-            url = "product/equip"
+            url = "equip"
         }
         var requestOptions = {
         method: 'POST',
@@ -56,7 +56,7 @@ export const AddItem = (props) => {
         body: formdata,
         redirect: 'follow'
         };
-        fetch(url, requestOptions)
+        fetch(`http://fog-prod.popsicool.tech/${url}`, requestOptions)
         .then(response => {
             if (!response.ok)
             {

@@ -47,7 +47,7 @@ const [bird, setBird] = useState([])
 const [crop, setCrop] = useState([])
 const [equip, setEquip] = useState([])
 useEffect(()=>{
-    const url = "http://user:8000/all"
+    const url = "http://fog-api.popsicool.tech/all"
         const abortCont = new AbortController();
     // pass second arg to fetch for the sake of abort controller
         fetch(url, { signal: abortCont.signal })
@@ -75,7 +75,7 @@ useEffect(()=>{
 )
 let updateToken = async ()=> {
   if (user !== null){
-    fetch('http://user:8000/api/token/refresh/', {
+    fetch('http://fog-prod.popsicool.tech/api/token/refresh/', {
         method:'POST',
         headers:{
             'Content-Type':'application/json'
