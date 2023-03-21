@@ -9,7 +9,7 @@ export const Contact = () => {
     const sendContact = (e) => {
         e.preventDefault()
         const data = {name, email, body}
-        fetch('http://user:8000/contact', {
+        fetch('user/contact', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data)

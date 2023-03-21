@@ -23,7 +23,7 @@ export const Tecno = () => {
     e.preventDefault()
     setIsLoading(true)
     const loginForm ={"username": loginName, "password": loginPass}
-    fetch("http://127.0.0.1:8001/api/token/", {
+    fetch("product/api/token/", {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(loginForm)})
@@ -51,7 +51,7 @@ export const Tecno = () => {
     e.preventDefault()
     setIsLoading(true)
     const signinForm = {"email": signinEmail, "username" : SigninName, "password": SigninPass}
-    fetch("http://127.0.0.1:8001/user", {
+    fetch("product/user", {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(signinForm)})

@@ -42,13 +42,13 @@ export const AddItem = (props) => {
         }
         let url;
         if(addAnimal){
-            url = "http://127.0.0.1:8001/bird"
+            url = "product/bird"
         }
         else if(addCrop){
-            url = "http://127.0.0.1:8001/crop"
+            url = "product/crop"
         }
         else{
-            url = "http://127.0.0.1:8001/equip"
+            url = "product/equip"
         }
         var requestOptions = {
         method: 'POST',

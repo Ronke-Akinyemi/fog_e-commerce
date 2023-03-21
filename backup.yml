@@ -6,9 +6,12 @@ services:
       dockerfile: Dockerfile
     container_name: fog
     ports:
-      - "3000:3000"
+      - "3000:80"
     expose:
       - "3000"
+    volumes:
+      - './fog:/usr/app'
+      - '/usr/app/node_module'
     environment:
       - CHORKIDAR_USEPOLLING=true
     depends_on:
