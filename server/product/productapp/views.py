@@ -163,7 +163,7 @@ class SingleEquipView(generics.GenericAPIView):
 class GetPaymentHistory(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
-        url = "http://localhost:5001"
+        url = "http://payment:5000"
         response = requests.get(url)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
@@ -172,7 +172,7 @@ class GetPaymentHistory(APIView):
 class AllSubcribers(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
-        url = "http://localhost:5002/sub"
+        url = "http://payment:5000/sub"
         response = requests.get(url)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
@@ -204,7 +204,7 @@ class GetPrices(APIView):
 class Newsletter(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request):
-        url = "http://localhost:5002/news"
+        url = "http://payment:5000/news"
         headers = {"Content-type": "application/json"}
         data = json.dumps(request.data)
         response = requests.post(url, headers=headers, data=data)

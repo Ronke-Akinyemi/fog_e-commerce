@@ -47,7 +47,7 @@ const [bird, setBird] = useState([])
 const [crop, setCrop] = useState([])
 const [equip, setEquip] = useState([])
 useEffect(()=>{
-    const url = "http://localhost:8000/all"
+    const url = "http://user:8000/all"
         const abortCont = new AbortController();
     // pass second arg to fetch for the sake of abort controller
         fetch(url, { signal: abortCont.signal })

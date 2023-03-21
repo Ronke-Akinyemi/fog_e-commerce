@@ -42,7 +42,7 @@ export const Carts = () => {
     data.push({"id": element.id, "quantity": element.quantity})
   });
     const item = {email, name, phone, address, "data": data}
-    fetch('http://localhost:5001/pay', {
+    fetch('http://user:8000/pay', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)

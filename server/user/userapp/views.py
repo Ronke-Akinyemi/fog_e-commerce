@@ -19,7 +19,7 @@ def ping(request):
 
 class AllProductView(APIView):
     def get(self, request):
-        url = "http://localhost:8001"
+        url = "http://product:8008"
         response = requests.get(url)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
@@ -29,7 +29,7 @@ class AllProductView(APIView):
 class BirdView(APIView):
     parser_classes = [FormParser, MultiPartParser, JSONParser]
     def get(self, request):
-        url = "http://localhost:8001/bird"
+        url = "http://product:8000/bird"
         response = requests.get(url)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
@@ -38,7 +38,7 @@ class BirdView(APIView):
 class SingleBirdView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request, pk):
-        url = f"http://localhost:8001/bird/{pk}"
+        url = f"http://product:8000/bird/{pk}"
         response = requests.get(url)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
@@ -47,14 +47,14 @@ class SingleBirdView(APIView):
 class CropView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
-        url = "http://localhost:8001/crop"
+        url = "http://product:8000/crop"
         response = requests.get(url)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
         return Response(response.json(), status = response.status_code)
 class SingleCropView(APIView):
     def get(self, request, pk):
-        url = f"http://localhost:8001/crop/{pk}"
+        url = f"http://product:8000/crop/{pk}"
         response = requests.get(url)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
@@ -62,7 +62,7 @@ class SingleCropView(APIView):
 
 class EquipView(APIView):
     def get(self, request):
-        url = "http://localhost:8001/equip"
+        url = "http://product:8000/equip"
         response = requests.get(url)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
@@ -70,7 +70,7 @@ class EquipView(APIView):
 
 class SingleEquipView(APIView):
     def get(self, request, pk):
-        url = f"http://localhost:8001/equip/{pk}"
+        url = f"http://product:8000/equip/{pk}"
         response = requests.get(url)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
@@ -78,7 +78,7 @@ class SingleEquipView(APIView):
 
 class MakePayment(APIView):
     def post(self, request):
-        url = "http://localhost:5001/pay"
+        url = "http://payment:5000/pay"
         headers = {"Content-type": "application/json"}
         data = json.dumps(request.data)
         response = requests.post(url, headers=headers, data=data)
@@ -88,7 +88,7 @@ class MakePayment(APIView):
 
 class VerifyPayment(APIView):
     def get(self, request, pk):
-        url = f"http://localhost:5001/verify/{pk}"
+        url = f"http://payment:5000/verify/{pk}"
         response = requests.get(url)
         if response.status_code != 200:
             return Response(response.reason, status = response.status_code)
@@ -96,7 +96,7 @@ class VerifyPayment(APIView):
 
 class ContactMessage(APIView):
     def post(self, request):
-        url = "http://localhost:5002/contact"
+        url = "http://notification:5000/contact"
         headers = {"Content-type": "application/json"}
         data = json.dumps(request.data)
         response = requests.post(url, headers=headers, data=data)
@@ -105,7 +105,7 @@ class ContactMessage(APIView):
         return Response(response.json(), status = response.status_code)
 class Subscibe(APIView):
     def post(self, request):
-        url = "http://localhost:5002/sub"
+        url = "http://notification:5000/sub"
         headers = {"Content-type": "application/json"}
         data = json.dumps(request.data)
         response = requests.post(url, headers=headers, data=data)
@@ -115,7 +115,7 @@ class Subscibe(APIView):
 
 class UnSubscibe(APIView):
     def post(self, request):
-        url = "http://localhost:5002/unsub"
+        url = "http://notification:5000/unsub"
         headers = {"Content-type": "application/json"}
         data = json.dumps(request.data)
         response = requests.post(url, headers=headers, data=data)
