@@ -10,7 +10,7 @@ export const History = () => {
                 </p>
                 <p>Aina Adeyemi, MD FOG</p>
             </div>
-            <div className='col-md-4 d-flex align-items-center' ><img src="./images/tecno1.jpg" className='rounded-circle' alt="client" height="250px" width="250px"/></div>
+            <div className='col-md-4 d-flex align-items-center' ><img src="./images/tecno.jpg" className='rounded-circle' alt="client" height="250px" width="250px"/></div>
         </div>
   )
 }

@@ -52,7 +52,7 @@ export const EditCrop = () => {
         body: formdata,
         redirect: 'follow'
         };
-        fetch(`http://fog-prod.popsicool.tech/crop/${crop.id}`, requestOptions)
+        fetch(`http://localhost:8001/crop/${crop.id}`, requestOptions)
         .then(response => {
             if (!response.ok)
             {
@@ -71,6 +71,7 @@ export const EditCrop = () => {
         .then(() => {
             inform()
             setIsloading(false)
+            window.location.reload()
         })
         .catch(() => setIsloading(false));
     }
@@ -80,7 +81,7 @@ export const EditCrop = () => {
         setIsloading(true)
         myHeaders.append("Authorization", `Bearer ${user.access}`);
         myHeaders.append("Content-Type", "application/json")
-        fetch(`http://fog-prod.popsicool.tech/crop/${crop.id}`, {
+        fetch(`http://localhost:8001/crop/${crop.id}`, {
             method : 'DELETE',
             headers: myHeaders
         })
@@ -100,6 +101,7 @@ export const EditCrop = () => {
         .then(() => {
             del()
             setIsloading(false)
+            window.location.reload()
         })
         .catch(() => {
             setIsloading(false)

@@ -5,6 +5,8 @@ import { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../components/Loading';
+import { Invoice } from '../components/Invoice';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 export const Carts = () => {
   const cart = useContext(CartContext).cart
@@ -42,7 +44,7 @@ export const Carts = () => {
     data.push({"id": element.id, "quantity": element.quantity})
   });
     const item = {email, name, phone, address, "data": data}
-    fetch('user/pay', {
+    fetch('http://localhost:8000/pay', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
@@ -85,7 +87,6 @@ export const Carts = () => {
           <tbody>
           {
             cart.map((item, index) => (
-              <>
                 <tr key={item.id}>
                   <td>{index + 1}</td>
                 <td>{item.name}</td>
@@ -101,7 +102,6 @@ export const Carts = () => {
       <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
     </svg></button></td>
               </tr>
-              </>
             ))
           }
           </tbody>
@@ -117,10 +117,11 @@ export const Carts = () => {
           <div className="canBtnBG">
             <button type='button' className="canBtn" onClick={hideModel} ><span aria-hidden="true">&times;</span></button>
           </div>
-          <div align-items-left>
+          <div className='align-items-left'>
             <h1 className='oA'>
               Total : N {total}
             </h1>
+            <p className='text-danger'>Delivery fee not yet included!!!</p>
           </div>
             <div>
             <form onSubmit={makePayment}>
@@ -136,7 +137,7 @@ export const Carts = () => {
                     ></input>
                 </div>
                 <div className='col-sm-6 form-outline' >
-                  <label className="form-label oA"> <i class="fa fa-envelope prefix grey-text"></i> Email</label><br></br>
+                  <label className="form-label oA"> <i className="fa fa-envelope prefix grey-text"></i> Email</label><br></br>
                   <input
                   className="form-control"
                   type="email"
@@ -147,7 +148,7 @@ export const Carts = () => {
                 </div>
               </div>
                 <div className='col'>
-                  <label className="form-label oA"> <i class="fa fa-phone prefix grey-text"></i> Phone Number</label><br></br>
+                  <label className="form-label oA"> <i className="fa fa-phone prefix grey-text"></i> Phone Number</label><br></br>
                   <input
                    className="form-control"
                     type="tel"
@@ -157,7 +158,7 @@ export const Carts = () => {
                     ></input>
                 </div>
                 <div className='col'>
-                  <label className="form-label oA"> <i class="fa fa-map-marker prefix grey-text"></i> Address</label><br></br>
+                  <label className="form-label oA"> <i className="fa fa-map-marker prefix grey-text"></i> Address</label><br></br>
                   <textarea
                    className="form-control" rows="4"
                    required
@@ -168,9 +169,9 @@ export const Carts = () => {
                 </div>
 
               <div className="justify-content-center mt-5 align-item-center d-flex gap-1">
-                        <button type="button" className="btn btn-secondary"  onClick={hideModel}>Close</button>
+                          <PDFDownloadLink document ={<Invoice name="Sam" total={total} cart={cart}/>} fileName="Invoice"><button type="button" className="btn btn-secondary"> Download Invoice </button> </PDFDownloadLink>
                         <button type="submit" className="btn btn-primary">Pay Online</button>
-                
+
                 </div>
             </form>
 

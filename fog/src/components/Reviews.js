@@ -13,9 +13,15 @@ export const Reviews = () => {
         },
         {
             "name":"Mr Ernest Uzebo",
-            "image": "../images/reviews/rev3.jpg",
+            "image": "../images/reviews/rev4.jpg",
             "words": "When it comes to Fast, reliable, trustworthy and efficient delivery, I give it to FOG agricultural services",
             "title": "CEO Beta Agro and Allied Services"
+        },
+        {
+            "name":"Mr Zaccheus",
+            "image": "../images/reviews/rev5.jpg",
+            "words": "In terms of Agricultural inputs, Crops and animal, FOG stand out in term of quality, affordability and fast delivery",
+            "title": "Manager, Hirstville Farms"
         },
         {
             "name":"Mr UZOMA",
@@ -47,7 +53,7 @@ export const Reviews = () => {
     <Carousel responsive={responsive}>
         {reviews.map((rev) => (
             <div key={rev.name} className="align-item-center justify-content-center m-5 p-5 row hiS">
-                <div className='col-md-5' ><img src={rev.image} alt="client" height="300px" width="300px" className='rounded-circle'/></div>
+                <div className='col-md-5' ><img src={rev.image} alt="client" className='rounded-circle rImage'/></div>
                 <div className='col-md-7 mt-5'>
                     <p>{rev.words}</p>
                     <hr className='hr'></hr>

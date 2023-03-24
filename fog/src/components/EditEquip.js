@@ -52,7 +52,7 @@ export const EditEquip = () => {
         body: formdata,
         redirect: 'follow'
         };
-        fetch(`http://fog-prod.popsicool.tech/equip/${equip.id}`, requestOptions)
+        fetch(`http://localhost:8001/equip/${equip.id}`, requestOptions)
         .then(response => {
             if (!response.ok)
             {
@@ -79,7 +79,7 @@ export const EditEquip = () => {
         setIsloading(true)
         myHeaders.append("Authorization", `Bearer ${user.access}`);
         myHeaders.append("Content-Type", "application/json")
-        fetch(`http://fog-prod.popsicool.tech/equip/${equip.id}`, {
+        fetch(`http://localhost:8001/equip/${equip.id}`, {
             method : 'DELETE',
             headers: myHeaders
         })

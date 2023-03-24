@@ -56,7 +56,7 @@ export const AddItem = (props) => {
         body: formdata,
         redirect: 'follow'
         };
-        fetch(`http://fog-prod.popsicool.tech/${url}`, requestOptions)
+        fetch(`http://localhost:8001/${url}`, requestOptions)
         .then(response => {
             if (!response.ok)
             {
@@ -74,6 +74,7 @@ export const AddItem = (props) => {
         .then(() => {
             inform()
             setIsloading(false)
+            window.location.reload()
         })
         .catch(() => setIsloading(false));
     }

@@ -10,6 +10,7 @@ export const Footer = () => {
     e.preventDefault()
     const data = {email}
     console.log(data)
+    setEmail("")
     inform()
   }
   const d = new Date();

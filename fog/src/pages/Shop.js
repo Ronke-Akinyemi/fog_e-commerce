@@ -70,6 +70,7 @@ export const Shop = () => {
                 <input
                 type="number"
                 value = {quantity}
+                placeholder="quantity"
                 onChange = {(e) => {
                     quantity < 0 ? setQuantity(0) : setQuantity(e.target.value)
                     setItem({...item, "quantity": parseInt(e.target.value)})

@@ -36,8 +36,8 @@ def contact():
     msg = Message("FOG Agricultural service", sender = os.getenv("email"), recipients = [email])
     msg.body = f'Dear {name},\n\n\nThank you for taking your time to reach out to FOG agricultural services, We sincerely do appreciate it\n\nPlease note that your message will be looked into and feedback will be sent to you within a short period of time.\n\nOnce again, thanks for your time.\n\nWarm Regards,\n\nAina Adeyemi\n\nMD FOG Agric.'
     mail.send(msg)
-    msg = Message("New Contact message Notification", sender = os.getenv("email"), recipients = ["akinolasamson1234@gmail.com"])
-    msg.body = f"A new contact message received from {name} with email {email}"
+    msg = Message("New Contact message Notification", sender = os.getenv("email"), recipients = ["fog.agricservices@gmail.com"])
+    msg.body = f"A new contact message received from {name} with email {email} which goes thus: \n\n{body}\n\nAn autoresponse has been sent to them\n\nPlease see to it "
     mail.send(msg)
     new_contact = ContactMessage(
         name = name,

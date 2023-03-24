@@ -57,7 +57,7 @@ export const EditBird = () => {
         body: formdata,
         redirect: 'follow'
         };
-        fetch(`http://fog-prod.popsicool.tech/crop/${bird.id}`, requestOptions)
+        fetch(`http://localhost:8001/crop/${bird.id}`, requestOptions)
         .then(response => {
             if (!response.ok)
             {
@@ -75,6 +75,7 @@ export const EditBird = () => {
         .then(() => {
             inform()
             setIsloading(false)
+            window.location.reload()
         })
         .catch(() => setIsloading(false));
     }
@@ -84,7 +85,7 @@ export const EditBird = () => {
         setIsloading(true)
         myHeaders.append("Authorization", `Bearer ${user.access}`);
         myHeaders.append("Content-Type", "application/json")
-        fetch(`http://fog-prod.popsicool.tech/crop/${bird.id}`, {
+        fetch(`http://localhost:8001/crop/${bird.id}`, {
             method : 'DELETE',
             headers: myHeaders
         })
@@ -104,6 +105,7 @@ export const EditBird = () => {
         .then(() => {
             del()
             setIsloading(false)
+            window.location.reload()
         })
         .catch(() => {
             setIsloading(false)
