@@ -1,6 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,django,react,flask
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,django,react,flask
-
+docker-compose.yaml
 ### Django ###
 *.log
 *.pot

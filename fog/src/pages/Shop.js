@@ -62,7 +62,7 @@ export const Shop = () => {
                   <p>{info}</p>
                 <hr className="hr"></hr>
                 <div className='row'>
-                  <p className='col-md-4 mN'>Unit price :<p>N {price}</p></p>
+                  <p className='col-md-4 mN'>Unit price :N {price}</p>
                 {quantity > 0 &&<><p className='col-md-4 mN'>Quantity: <p>{quantity}</p></p> <p className='col-md-4 mN'>Amount: <p>{amount}</p></p></>}
 
                 </div>

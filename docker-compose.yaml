@@ -1,21 +1,21 @@
 version: "3.8"
 services:
-  # fog:
-  #   build:
-  #     context: ./fog
-  #     dockerfile: Dockerfile
-  #   container_name: fog
-  #   ports:
-  #     - "3000:3000"
-  #   expose:
-  #     - "3000"
-  #   environment:
-  #     - CHORKIDAR_USEPOLLING=true
-  #   depends_on:
-  #     - user
-  #     - payment
-  #     - product
-  #     - notification
+  fog:
+    build:
+      context: ./fog
+      dockerfile: Dockerfile
+    container_name: fog
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    environment:
+      - CHORKIDAR_USEPOLLING=true
+    depends_on:
+      - user
+      - payment
+      - product
+      - notification
   user:
     build:
       context: ./server/user
@@ -44,11 +44,6 @@ services:
       - "8008:8000"
     environment:
       - CHORKIDAR_USEPOLLING=true
-      - SECRET_KEY=$SECRET_KEY
-      - DEBUG=$DEBUG
-      - CLOUD_NAME=$CLOUD_NAME
-      - API_KEY=$API_KEY
-      - API_SECRET=$API_SECRET
   notification:
     build:
       context: ./server/notification
@@ -61,8 +56,6 @@ services:
       - ./server/notification/.env
     environment:
       - CHORKIDAR_USEPOLLING=true
-      - email=$email
-      - password=$password
   payment:
     build:
       context: ./server/payment
@@ -75,5 +68,3 @@ services:
       - ./server/payment/.env
     environment:
       - CHORKIDAR_USEPOLLING=true
-      - PAYSTACK_SECRET_KEY=$PAYSTACK_SECRET_KEY
-      - PAYSTACK_PUBLIC_KEY=$PAYSTACK_PUBLIC_KEY

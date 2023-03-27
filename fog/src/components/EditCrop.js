@@ -52,7 +52,7 @@ export const EditCrop = () => {
         body: formdata,
         redirect: 'follow'
         };
-        fetch(`http://localhost:8001/crop/${crop.id}`, requestOptions)
+        fetch(`http://localhost:8008/crop/${crop.id}`, requestOptions)
         .then(response => {
             if (!response.ok)
             {
@@ -81,7 +81,7 @@ export const EditCrop = () => {
         setIsloading(true)
         myHeaders.append("Authorization", `Bearer ${user.access}`);
         myHeaders.append("Content-Type", "application/json")
-        fetch(`http://localhost:8001/crop/${crop.id}`, {
+        fetch(`http://localhost:8008/crop/${crop.id}`, {
             method : 'DELETE',
             headers: myHeaders
         })

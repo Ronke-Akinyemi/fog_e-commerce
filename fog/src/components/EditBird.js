@@ -57,7 +57,7 @@ export const EditBird = () => {
         body: formdata,
         redirect: 'follow'
         };
-        fetch(`http://localhost:8001/crop/${bird.id}`, requestOptions)
+        fetch(`http://localhost:8008/bird/${bird.id}`, requestOptions)
         .then(response => {
             if (!response.ok)
             {
@@ -85,7 +85,7 @@ export const EditBird = () => {
         setIsloading(true)
         myHeaders.append("Authorization", `Bearer ${user.access}`);
         myHeaders.append("Content-Type", "application/json")
-        fetch(`http://localhost:8001/crop/${bird.id}`, {
+        fetch(`http://localhost:8008/bird/${bird.id}`, {
             method : 'DELETE',
             headers: myHeaders
         })

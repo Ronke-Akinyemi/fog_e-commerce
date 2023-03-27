@@ -56,7 +56,7 @@ export const AddItem = (props) => {
         body: formdata,
         redirect: 'follow'
         };
-        fetch(`http://localhost:8001/${url}`, requestOptions)
+        fetch(`http://localhost:8008/${url}`, requestOptions)
         .then(response => {
             if (!response.ok)
             {

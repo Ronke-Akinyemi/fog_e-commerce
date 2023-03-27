@@ -42,7 +42,7 @@ def pay():
         quantity = good["quantity"]
         if not id or not quantity or not isinstance(quantity, int):
             abort(400, description= "incomplete details")
-        url = f"http://localhost:8001/prices/{id}"
+        url = f"http://product:8000/prices/{id}"
         response = requests.get(url)
         price = response.json()
         if response.status_code != 200:

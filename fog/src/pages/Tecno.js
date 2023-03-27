@@ -23,7 +23,7 @@ export const Tecno = () => {
     e.preventDefault()
     setIsLoading(true)
     const loginForm ={"username": loginName, "password": loginPass}
-    fetch("http://localhost:8001/api/token/", {
+    fetch("http://localhost:8008/api/token/", {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(loginForm)})
