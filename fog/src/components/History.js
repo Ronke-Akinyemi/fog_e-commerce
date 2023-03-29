@@ -6,7 +6,7 @@ export const History = () => {
         <div className='row m-3 p-5 gx-3 hiS'>
             <div className='col-md-8 '>
                 <p>
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures.
+                    Every continent of the world have their own peculiar problem which they face, The one perculiar to africa is majorly unavaliabilty of foods all year round which is caused my many factors including farmers having hard time getting the appropriate item at the right time and also getting their good to the target customer at the right time. This gap is what we have come to mend by providing farmers with a one stop online shop to meet all their needs and also connect them, with the appropriate customers at the right time. We are FOG Agriculture, we see agricultural problems, we solve them.
                 </p>
                 <p>Aina Adeyemi, MD FOG</p>
             </div>
