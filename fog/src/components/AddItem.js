@@ -21,6 +21,7 @@ export const AddItem = (props) => {
     const inform = () => toast.success("New Product added", {
     position:"top-right"
     })
+    // Handle form submit
     const submitForm = (e) => {
          e.preventDefault()
          setIsloading(true)

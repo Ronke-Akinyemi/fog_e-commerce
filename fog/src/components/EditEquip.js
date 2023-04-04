@@ -4,6 +4,7 @@ import { CartContext } from '../App'
 import { toast } from 'react-toastify';
 import { Loading } from './Loading';
 
+// component for updating equipment product
 export const EditEquip = () => {
   const allEquip = useContext(ItemContext).equip
     const [equip, setEquip] = useState(allEquip[0])

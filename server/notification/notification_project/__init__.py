@@ -1,3 +1,7 @@
+''' 
+Create a flask project that handles notification service
+'''
+
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy

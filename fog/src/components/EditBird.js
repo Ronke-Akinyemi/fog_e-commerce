@@ -3,6 +3,7 @@ import { ItemContext, CartContext } from '../App'
 import { toast } from 'react-toastify';
 import { Loading } from './Loading';
 
+// Component for updating an animal product
 export const EditBird = () => {
     const allBird = useContext(ItemContext).bird
     const [bird, setBird] = useState(allBird[0])

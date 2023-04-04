@@ -4,6 +4,7 @@ import { CartContext } from '../App'
 import { toast } from 'react-toastify';
 import { Loading } from './Loading';
 
+//component for updating animal product
 export const EditCrop = () => {
   const allCrop = useContext(ItemContext).crop
     const [crop, setCrop] = useState(allCrop[0])
