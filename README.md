@@ -21,7 +21,7 @@ The User interface is built with react javascript framework with the following t
 * react-router-dom
 * react-switch
 * react-toastify
-The specific version for each third party library can be found in the package.json file
+The specific version for each third party library can be found in the package.json file.
 
 
 ### User Microservice
