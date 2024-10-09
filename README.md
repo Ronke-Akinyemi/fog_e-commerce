@@ -1,12 +1,12 @@
-# ALX Foundation stage portfolio project
+# FOG Agric E-commerce project
 
 ![MasterHead](https://www.alxafrica.com/wp-content/uploads/2023/01/7_Do-hard-things-100.jpg)
 <br><br>
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Merriweather&size=25&duration=4000&pause=1000&color=FF0000&background=00FFE400&center=true&width=1000&lines=ALX+Portfoliio+Website+Project;This+is+the+hard+thing+we+built😊;By+Akinola+Samson+and+Adebayo+Fredrick)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Merriweather&size=25&duration=4000&pause=1000&color=FF0000&background=00FFE400&center=true&width=1000&lines=ALX+Portfoliio+Website+Project;This+is+the+hard+thing+we+built😊;By+Akinola+Samson)](https://git.io/typing-svg)
 ## Description:
 
-This project will serve as our final portfolio website for our alx Software engineering foundation phase
+Backend and frontend for FOG Agric
 
 ## Architecture:
 
@@ -42,10 +42,6 @@ At the root of the project, a docker-compose.yml file is used to run the whole b
 
 ## Testing
 Each microservices will have set of test cases writen to test the authnticity of the codes and also used to test the codes before being deployed for production
-## To-do
-1. Build a CI/CD pipeline with Jenkins to automate the deploment to a linux server
-1. Improve the frontend to include search functionality and filter functionality for users for better user experience
-1. Add more backend microservices as need arises
-## Authors
+
+## Author
 1. Akinola Samson Oluwasegun <akinolasamson1234@gmail.com>
-1. Fedrick Adedayo <alfredfredrick41@gmail.com>
